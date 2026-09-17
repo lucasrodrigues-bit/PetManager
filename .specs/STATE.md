@@ -29,10 +29,11 @@
 ## Handoff
 
 - **Feature**: petmanager-mvp
-- **Phase / Task**: Phase 1 / T3 - migration da tabela `profiles`
-- **Completed**: T1, T2
+- **Phase / Task**: Phase 1 / T4 - migration das tabelas de domínio
+- **Completed**: T1, T2, T3
 - **In-progress**: none
-- **Next step**: Executar T3 (migration `profiles` com role/ativo, via Supabase MCP `apply_migration`)
+- **Next step**: Executar T4 (tabelas de domínio: horarios_funcionamento, tutores, pets, servicos, agendamentos, agendamento_servicos, vacinas, produtos, movimentacoes_estoque)
+- **Blockers**: RLS ainda desabilitado em `profiles` (e vai ficar assim em `public` até a T5) — risco aceito temporariamente, sem dados reais trafegando ainda
 - **Blockers**: none
 - **Uncommitted files**: none (tudo commitado após T1)
 - **Branch**: main

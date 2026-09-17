@@ -203,6 +203,8 @@ segredos para documentar as variáveis exigidas. Conexão validada via
 
 ### T3: Migration — tabela `profiles` (role, ativo)
 
+**Status**: ✅ Complete
+
 **What**: Criar migration SQL da tabela `profiles` vinculada a
 `auth.users`, com colunas `role` (`dono`/`recepcionista`) e `ativo`
 (soft-disable).
@@ -216,11 +218,20 @@ segredos para documentar as variáveis exigidas. Conexão validada via
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Migration aplicada sem erro
-- [ ] Tabela `profiles` com FK para `auth.users`
+- [x] Migration aplicada sem erro
+- [x] Tabela `profiles` com FK para `auth.users`
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: Migration aplicada via Supabase MCP
+(`apply_migration`, nome `profiles`). `id` é PK e FK direta para
+`auth.users(id)` — padrão idiomático do Supabase para tabela de perfil
+1:1 (a preocupação geral de "evitar UUID aleatório como PK" não se aplica
+aqui: o UUID não é gerado por nós, vem do próprio `auth.users`, e o
+acesso é sempre por lookup direto do `id`, nunca por range scan).
+**RLS ainda não habilitado nessa tabela — entra na T5**, conforme
+avisado pelo próprio advisor do Supabase.
 
 ---
 
