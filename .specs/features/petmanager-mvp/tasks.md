@@ -237,6 +237,8 @@ avisado pelo próprio advisor do Supabase.
 
 ### T4: Migration — tabelas de domínio
 
+**Status**: ✅ Complete
+
 **What**: Criar migration com as tabelas `horarios_funcionamento`,
 `tutores`, `pets`, `servicos`, `agendamentos`, `agendamento_servicos`,
 `vacinas`, `produtos`, `movimentacoes_estoque`, conforme modelo de dados
@@ -251,12 +253,23 @@ do design.
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Todas as tabelas criadas com os tipos corretos
-- [ ] FKs entre `pets→tutores`, `agendamentos→pets`, `agendamento_servicos→agendamentos/servicos`, `vacinas→pets`, `movimentacoes_estoque→produtos`
-- [ ] Índices em colunas usadas em filtro (ex.: `agendamentos.data_hora`)
+- [x] Todas as tabelas criadas com os tipos corretos
+- [x] FKs entre `pets→tutores`, `agendamentos→pets`, `agendamento_servicos→agendamentos/servicos`, `vacinas→pets`, `movimentacoes_estoque→produtos`
+- [x] Índices em colunas usadas em filtro (ex.: `agendamentos.data_hora`)
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: `bigint generated always as identity` como PK em
+todas as tabelas de domínio (sequencial, sem fragmentação de índice —
+diferente do caso de `profiles`, aqui não há motivo pra usar UUID).
+Índice criado em toda coluna de FK (`pets.tutor_id`,
+`agendamentos.pet_id`, `agendamentos.criado_por`,
+`agendamento_servicos.servico_id`, `vacinas.pet_id`,
+`movimentacoes_estoque.produto_id`), mais um índice extra em
+`agendamentos.data_hora` por ser o filtro mais comum (AGD-02). RLS ainda
+desabilitado em todas as 10 tabelas — confirmado pelo advisor de
+segurança do Supabase, corrigido na T5 (próxima).
 
 ---
 

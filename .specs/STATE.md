@@ -29,11 +29,11 @@
 ## Handoff
 
 - **Feature**: petmanager-mvp
-- **Phase / Task**: Phase 1 / T4 - migration das tabelas de domínio
-- **Completed**: T1, T2, T3
+- **Phase / Task**: Phase 1 / T5 - RLS policies
+- **Completed**: T1, T2, T3, T4
 - **In-progress**: none
-- **Next step**: Executar T4 (tabelas de domínio: horarios_funcionamento, tutores, pets, servicos, agendamentos, agendamento_servicos, vacinas, produtos, movimentacoes_estoque)
-- **Blockers**: RLS ainda desabilitado em `profiles` (e vai ficar assim em `public` até a T5) — risco aceito temporariamente, sem dados reais trafegando ainda
+- **Next step**: Executar T5 (RLS em todas as 10 tabelas, usando `(select auth.uid())` conforme AD-003)
+- **Blockers**: RLS desabilitado em TODAS as tabelas do schema `public` (10 no total) — corrigido na T5, próxima task
 - **Blockers**: none
 - **Uncommitted files**: none (tudo commitado após T1)
 - **Branch**: main
