@@ -29,10 +29,10 @@
 ## Handoff
 
 - **Feature**: petmanager-mvp
-- **Phase / Task**: Phase 1 / T2 - criar projeto Supabase e configurar variáveis de ambiente
-- **Completed**: T1
+- **Phase / Task**: Phase 1 / T3 - migration da tabela `profiles`
+- **Completed**: T1, T2
 - **In-progress**: none
-- **Next step**: Executar T2 (projeto Supabase "petmanager project" já existe via MCP, id `lfllgrvnxlxtbjbszgqj`, região `ca-central-1` — falta obter URL/anon key e configurar `.env.local`)
+- **Next step**: Executar T3 (migration `profiles` com role/ativo, via Supabase MCP `apply_migration`)
 - **Blockers**: none
 - **Uncommitted files**: none (tudo commitado após T1)
 - **Branch**: main

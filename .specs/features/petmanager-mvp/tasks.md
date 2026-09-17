@@ -170,6 +170,8 @@ reduz uma dependência externa no runtime de produção.
 
 ### T2: Criar projeto Supabase e configurar variáveis de ambiente
 
+**Status**: ✅ Complete
+
 **What**: Criar o projeto no Supabase via Supabase MCP e configurar
 `.env.local` com URL e chaves.
 **Where**: `.env.local`
@@ -182,12 +184,20 @@ reduz uma dependência externa no runtime de produção.
 - Skill: NONE
 
 **Done when**:
-- [ ] Projeto Supabase criado
-- [ ] `.env.local` com `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- [ ] Conexão testada com sucesso (query simples)
+- [x] Projeto Supabase criado
+- [x] `.env.local` com `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- [x] Conexão testada com sucesso (query simples)
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: Projeto "petmanager project" já existia (criado
+pelo usuário, id `lfllgrvnxlxtbjbszgqj`, região `ca-central-1`). URL e
+chave publicável (`sb_publishable_...`, formato moderno recomendado pelo
+Supabase, substitui a legacy anon JWT key) obtidas via Supabase MCP e
+gravadas em `.env.local` (git-ignorado). `.env.example` criado sem
+segredos para documentar as variáveis exigidas. Conexão validada via
+`supabase.auth.getSession()` sem erro.
 
 ---
 
