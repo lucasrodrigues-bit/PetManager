@@ -29,10 +29,10 @@
 ## Handoff
 
 - **Feature**: petmanager-mvp
-- **Phase / Task**: Phase 1 / T1 - inicializar projeto Next.js
-- **Completed**: none
-- **In-progress**: T1 (scaffold já criado pelo usuário localmente: Next.js 16 + TypeScript + Tailwind v4 + ESLint; falta shadcn/ui)
-- **Next step**: Finalizar T1 (inicializar shadcn/ui) e rodar gate de build
+- **Phase / Task**: Phase 1 / T2 - criar projeto Supabase e configurar variáveis de ambiente
+- **Completed**: T1
+- **In-progress**: none
+- **Next step**: Executar T2 (projeto Supabase "petmanager project" já existe via MCP, id `lfllgrvnxlxtbjbszgqj`, região `ca-central-1` — falta obter URL/anon key e configurar `.env.local`)
 - **Blockers**: none
-- **Uncommitted files**: .specs/ (spec.md, design.md, tasks.md, STATE.md) ainda não commitados neste repositório
+- **Uncommitted files**: none (tudo commitado após T1)
 - **Branch**: main

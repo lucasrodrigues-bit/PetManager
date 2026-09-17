@@ -136,6 +136,8 @@ T38 → T39 → T40
 
 ### T1: Inicializar projeto Next.js + TypeScript + Tailwind + shadcn/ui
 
+**Status**: ✅ Complete
+
 **What**: Criar o projeto base com `create-next-app` (App Router,
 TypeScript), configurar Tailwind e inicializar shadcn/ui.
 **Where**: `package.json`
@@ -148,12 +150,21 @@ TypeScript), configurar Tailwind e inicializar shadcn/ui.
 - Skill: NONE
 
 **Done when**:
-- [ ] Projeto Next.js roda localmente (`npm run dev`)
-- [ ] Tailwind configurado e funcionando
-- [ ] shadcn/ui inicializado com pelo menos 1 componente de exemplo
+- [x] Projeto Next.js roda localmente (`npm run dev`)
+- [x] Tailwind configurado e funcionando
+- [x] shadcn/ui inicializado com pelo menos 1 componente de exemplo
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: shadcn/ui inicializado manualmente (componentes
+copiados à mão) porque a CLI (`npx shadcn init`) depende de
+`ui.shadcn.com`, fora da allowlist de rede deste ambiente sandbox — fora
+dele (Vercel, máquina local) a CLI funciona normalmente. Fontes Google
+(`next/font/google`) removidas do layout por depender de
+`fonts.googleapis.com`, também fora da allowlist; layout usa a stack de
+fontes do sistema (`ui-sans-serif, system-ui...`) — decisão que também
+reduz uma dependência externa no runtime de produção.
 
 ---
 
