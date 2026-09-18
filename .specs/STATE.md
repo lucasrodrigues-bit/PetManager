@@ -29,11 +29,11 @@
 ## Handoff
 
 - **Feature**: petmanager-mvp
-- **Phase / Task**: Phase 1 / T5 - RLS policies
-- **Completed**: T1, T2, T3, T4
+- **Phase / Task**: Phase 1 / T6 - Configurar Vitest
+- **Completed**: T1, T2, T3, T4, T5
 - **In-progress**: none
-- **Next step**: Executar T5 (RLS em todas as 10 tabelas, usando `(select auth.uid())` conforme AD-003)
-- **Blockers**: RLS desabilitado em TODAS as tabelas do schema `public` (10 no total) — corrigido na T5, próxima task
+- **Next step**: Executar T6 (instalar/configurar Vitest, script `test:unit`)
 - **Blockers**: none
-- **Uncommitted files**: none (tudo commitado após T1)
+- **Reconciliation note (2026-09-18)**: T5 (RLS) já estava aplicado direto no Supabase desde 2026-09-17 (sessão anterior), incluindo um hardening extra de `search_path` na função `current_role_petmanager()` fora do escopo original. Nada disso tinha migration commitada nem os specs atualizados. Fechado por introspecção do banco: `0003_rls.sql` reconstruído para bater com o estado real, `tasks.md`/`spec.md` atualizados, lição registrada em `LESSONS.md`.
+- **Uncommitted files**: none (tudo commitado após esta reconciliação)
 - **Branch**: main

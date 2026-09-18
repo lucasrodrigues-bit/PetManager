@@ -275,6 +275,8 @@ segurança do Supabase, corrigido na T5 (próxima).
 
 ### T5: Migration — RLS policies
 
+**Status**: ✅ Complete
+
 **What**: Criar as policies de RLS para todas as tabelas, usando
 `(select auth.uid())` (nunca chamado linha a linha) e checagem de
 `role = 'dono'` nas tabelas restritas (`produtos`,
@@ -289,12 +291,23 @@ segurança do Supabase, corrigido na T5 (próxima).
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] RLS habilitado em todas as tabelas
-- [ ] Policies usam `(select auth.uid())`, não `auth.uid()` direto
-- [ ] `recepcionista` não consegue ler/escrever em `produtos`/`movimentacoes_estoque` (testado manualmente via SQL editor)
+- [x] RLS habilitado em todas as tabelas
+- [x] Policies usam `(select auth.uid())`, não `auth.uid()` direto
+- [x] `recepcionista` não consegue ler/escrever em `produtos`/`movimentacoes_estoque` (confirmado via introspecção das policies: ambas usam `current_role_petmanager() = 'dono'`, restrito a `authenticated`)
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: As policies foram aplicadas diretamente no Supabase
+(project `lfllgrvnxlxtbjbszgqj`) em 2026-09-17 numa sessão anterior, junto
+de uma correção extra (`fix_function_search_path`) que não fazia parte do
+escopo original — a função `current_role_petmanager()` recebeu `STABLE` +
+`search_path` fixo para eliminar um advisory de segurança do Supabase.
+Nenhuma das duas mudanças tinha sido commitada no repositório nem
+refletida aqui — gap encontrado e fechado em 2026-09-18 por introspecção
+do banco (`pg_policies`, `pg_proc`, `get_advisors`: 0 lints de segurança).
+`0003_rls.sql` foi reconstruído para casar exatamente com o estado do
+banco. Ver `LESSONS.md` (spec_deviation) para o registro do incidente.
 
 ---
 

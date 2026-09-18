@@ -241,7 +241,7 @@ especificar quando priorizada.
 |---|---|---|---|
 | AUTH-01 | P1: Autenticação e Papéis | Design | Pending |
 | AUTH-02 | P1: Autenticação e Papéis | Design | Pending |
-| AUTH-03 | P1: Autenticação e Papéis | Design | Pending |
+| AUTH-03 | P1: Autenticação e Papéis | Execute (T5) | Satisfied |
 | AUTH-04 | P1: Autenticação e Papéis | Design | Pending |
 | HOR-01 | P1: Cadastro de Horário de Funcionamento | Design | Pending |
 | HOR-02 | P1: Cadastro de Horário de Funcionamento | Design | Pending |
@@ -266,14 +266,14 @@ especificar quando priorizada.
 | EST-01 | P1: Controle de Estoque | Design | Pending |
 | EST-02 | P1: Controle de Estoque | Design | Pending |
 | EST-03 | P1: Controle de Estoque | Design | Pending |
-| EST-04 | P1: Controle de Estoque | Design | Pending |
+| EST-04 | P1: Controle de Estoque | Execute (T5) | Satisfied |
 | REL-01 | P1: Dashboard / Relatórios Mensais | Design | Pending |
 | REL-02 | P1: Dashboard / Relatórios Mensais | Design | Pending |
 | REL-03 | P1: Dashboard / Relatórios Mensais | Design | Pending |
 | REL-04 | P1: Dashboard / Relatórios Mensais | Design | Pending |
-| REL-05 | P1: Dashboard / Relatórios Mensais | Design | Pending |
+| REL-05 | P1: Dashboard / Relatórios Mensais | Execute (T5) | Satisfied |
 
-**Coverage:** 30 total, 0 mapped to tasks, 30 unmapped ⚠️
+**Coverage:** 30 total, 3 mapped to tasks, 27 unmapped ⚠️
 
 ---
 
