@@ -26,6 +26,14 @@
 - **Date**: 2026-09-16
 - **Status**: active
 
+### AD-004
+- **Decision**: Toda task deve avaliar, além das skills já indicadas em `tasks.md`, se alguma das skills abaixo se aplica antes de ser considerada concluída: `application-security-testing`, `better-auth-security-best-practices`, `find-security-vulnerabilities-in-code`, `fix-security-vulnerabilities-with-strix`, `managed-pentesting-with-strix`, `penetration-testing-with-strix`, `supabase-postgres-best-practices`, `brainstorming`, `ci-security-scanning-with-strix`, `documentation-writer`, `mysql`, `frontend-design`, `mastering-typescript`, `react-expert`, `software-architecture`, `prompt-engineering`, `vercel-react-best-practices`.
+- **Reason**: O software vai ser vendido a clientes reais (petshops) — segurança e qualidade de código pesam mais que velocidade. Ter o roster centralizado aqui evita esquecer de checar segurança/arquitetura numa task só porque `tasks.md` não previu aquela skill especificamente.
+- **Trade-off**: Duas skills do roster não batem com a stack do projeto hoje — `mysql` (o projeto usa Postgres/Supabase) e `better-auth-security-best-practices` (o projeto usa Supabase Auth, não a lib Better Auth). Mantidas na lista a pedido, mas devem ser tratadas como não aplicáveis até o stack mudar — nenhuma task deve seguir orientação de `mysql` ou `better-auth` como se valesse para Postgres/Supabase Auth.
+- **Scope**: Todas as tasks do projeto PetManager, do T7 em diante.
+- **Date**: 2026-09-18
+- **Status**: active
+
 ## Handoff
 
 - **Feature**: petmanager-mvp
