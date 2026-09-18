@@ -171,6 +171,8 @@ Components.
 
 ### T3: Componente e hook de filtros (`shared/filters`)
 
+**Status**: ✅ Complete
+
 **What**: Criar o hook `useListFilters` (lê/escreve `searchParams`) e o
 componente `<SearchFilterBar />` (busca debounced + select de atributo
 opcional), reutilizados por toda tela de listagem das próximas fases.
@@ -184,12 +186,19 @@ opcional), reutilizados por toda tela de listagem das próximas fases.
 - Skill: `frontend-design`, `react-expert`
 
 **Done when**:
-- [ ] Hook lê/escreve `busca` e `filtro` na URL sem recarregar a página
-- [ ] Busca e filtro combinados aplicam E lógico (validado por quem consome o hook)
-- [ ] Teste unitário do hook cobrindo leitura/escrita de searchParams
+- [x] Hook lê/escreve `busca` e `filtro` na URL sem recarregar a página (`router.replace` com `scroll: false`)
+- [x] Busca e filtro combinados aplicam E lógico (validado por quem consome o hook) — testado explicitamente
+- [x] Teste unitário do hook cobrindo leitura/escrita de searchParams (6 casos, incluindo filtro inválido na URL e remoção de parâmetro vazio)
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Precisou instalar `@testing-library/react`,
+`@testing-library/dom` e `jsdom` (não existiam ainda — T6 só cobriu o
+runner, não testes de componente/hook) e mudar `vitest.config.ts` para
+`environment: "jsdom"` + incluir `src/shared/**/__tests__`. Debounce da
+busca vive no componente (`SearchFilterBar`), não no hook — o hook só
+lê/escreve a URL, sem lógica de tempo.
 
 ---
 
