@@ -51,13 +51,21 @@
 - **Date**: 2026-09-18
 - **Status**: active
 
+### AD-007
+- **Decision**: Integração automática do v0.dev com o GitHub deste repositório foi desconectada pelo usuário. v0 volta a ser usado só como prototipagem isolada — export em `.zip`, enviado manualmente pra análise, nunca sincronizado direto com o repo.
+- **Reason**: Em 2026-09-18, o sync automático do v0 (branch `v0/lucasdeiror-7602-4095787c`, PR #8) substituiu a `main` inteira pelo export cru do v0 — apagou `.specs/` completo, `README.md`, os clientes Supabase, todas as Server Actions/queries feitas até então (T1-T5) e as configs de teste (Playwright/ESLint), sem aviso. Revertido via PR #11 (`git revert -m 1` do merge commit), nada foi perdido, mas o incidente mostrou que as duas fontes de escrita na `main` (SDD manual + v0 automático) não são compatíveis.
+- **Trade-off**: Perde a conveniência de já ver o protótipo do v0 direto em produção; ganha em não correr o risco de perder trabalho de novo. Um segundo export do v0 (`MVP.zip`, com dashboard de métricas de vendas e navegação mobile) foi recebido manualmente em 2026-09-18 e vai ser usado só como referência de UX quando chegarmos nas tasks de Vendas/Relatórios (T22-T24, T38-T41), sem reaproveitar código.
+- **Scope**: Todo o repositório `PetManager`, a partir de 2026-09-18.
+- **Date**: 2026-09-18
+- **Status**: active
+
 ## Handoff
 
 - **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
-- **Phase / Task**: Phase 2 / T6 - Query getCurrentUserRole
-- **Completed**: T1, T2, T3, T4, T5
+- **Phase / Task**: Phase 2 / T7 - Middleware de proteção de rota por papel
+- **Completed**: T1, T2, T3, T4, T5, T6
 - **In-progress**: none
-- **Next step**: Executar T6 (`getCurrentUserRole`)
+- **Next step**: Executar T7 (middleware bloqueando `recepcionista` de estoque/vendas de produto/relatórios)
 - **Blockers**: T7 do petmanager-mvp — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar o e2e de ponta a ponta
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main

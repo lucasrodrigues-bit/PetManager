@@ -262,6 +262,8 @@ Supabase Auth.
 
 ### T6: Query `getCurrentUserRole`
 
+**Status**: ✅ Complete
+
 **What**: Implementar função que retorna o papel (`dono`/`recepcionista`)
 do usuário autenticado, lendo da tabela `profiles`.
 **Where**: `src/features/auth/queries.ts`
@@ -274,9 +276,9 @@ do usuário autenticado, lendo da tabela `profiles`.
 - Skill: NONE
 
 **Done when**:
-- [ ] Retorna `null` se não autenticado
-- [ ] Retorna o papel correto para `dono` e `recepcionista`
-- [ ] Teste unitário cobrindo os três casos
+- [x] Retorna `null` se não autenticado
+- [x] Retorna o papel correto para `dono` e `recepcionista`
+- [x] Teste unitário cobrindo os três casos (+ um quarto: autenticado sem profile correspondente, também retorna `null` em vez de quebrar)
 
 **Tests**: unit
 **Gate**: quick
