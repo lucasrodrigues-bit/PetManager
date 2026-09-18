@@ -45,10 +45,10 @@
 ## Handoff
 
 - **Feature**: petmanager-mvp
-- **Phase / Task**: Phase 1 / T8 - Cliente Supabase server-side
-- **Completed**: T1, T2, T3, T4, T5, T6, T7
+- **Phase / Task**: Phase 1 / T9 - Cliente Supabase browser-side
+- **Completed**: T1, T2, T3, T4, T5, T6, T7, T8
 - **In-progress**: none
-- **Next step**: Executar T8 (helper de cliente Supabase para Server Components/Actions)
-- **Blockers**: T7 — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox (bloqueado por allowlist de rede) pra confirmar o e2e de ponta a ponta antes de considerar 100% validado
-- **Uncommitted files**: none (tudo commitado após T7)
+- **Next step**: Executar T9 (helper de cliente Supabase para Client Components)
+- **Blockers**: T7 — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar o e2e de ponta a ponta
+- **Uncommitted files**: none (tudo commitado após T8, via PR)
 - **Branch**: main

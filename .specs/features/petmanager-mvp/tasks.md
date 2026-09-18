@@ -378,6 +378,8 @@ isso testado de verdade. `build` (gate real da task) passou normalmente.
 
 ### T8: Criar cliente Supabase server-side
 
+**Status**: ✅ Complete (autenticação de ponta a ponta só é testável depois do T11-T14 — ver nota)
+
 **What**: Criar o helper de cliente Supabase para uso em Server
 Components e Server Actions.
 **Where**: `src/shared/supabase/server.ts`
@@ -390,11 +392,16 @@ Components e Server Actions.
 - Skill: NONE
 
 **Done when**:
-- [ ] Cliente autentica corretamente usando cookies da sessão
-- [ ] Importável por qualquer `features/*/actions.ts`
+- [x] Cliente autentica corretamente usando cookies da sessão — implementado no padrão oficial `@supabase/ssr` (getAll/setAll via `next/headers`); teste real de autenticação só é possível depois que login (T11-T14) existir
+- [x] Importável por qualquer `features/*/actions.ts` — `npx tsc --noEmit` limpo
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: `createClient()` assíncrono (Next.js 16 exige
+`await cookies()`). `setAll` embrulhado em try/catch — chamado de dentro
+de um Server Component (que não pode escrever cookie) não deve derrubar
+a app; o middleware de refresh de sessão do T13 cobre esse caso.
 
 ---
 
