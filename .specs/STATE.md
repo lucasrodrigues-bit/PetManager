@@ -29,11 +29,11 @@
 ## Handoff
 
 - **Feature**: petmanager-mvp
-- **Phase / Task**: Phase 1 / T6 - Configurar Vitest
-- **Completed**: T1, T2, T3, T4, T5
+- **Phase / Task**: Phase 1 / T7 - Configurar Playwright
+- **Completed**: T1, T2, T3, T4, T5, T6
 - **In-progress**: none
-- **Next step**: Executar T6 (instalar/configurar Vitest, script `test:unit`)
+- **Next step**: Executar T7 (instalar/configurar Playwright, script `test:e2e`)
 - **Blockers**: none
 - **Reconciliation note (2026-09-18)**: T5 (RLS) já estava aplicado direto no Supabase desde 2026-09-17 (sessão anterior), incluindo um hardening extra de `search_path` na função `current_role_petmanager()` fora do escopo original. Nada disso tinha migration commitada nem os specs atualizados. Fechado por introspecção do banco: `0003_rls.sql` reconstruído para bater com o estado real, `tasks.md`/`spec.md` atualizados, lição registrada em `LESSONS.md`.
-- **Uncommitted files**: none (tudo commitado após esta reconciliação)
+- **Uncommitted files**: none (tudo commitado após T6)
 - **Branch**: main

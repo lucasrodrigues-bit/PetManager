@@ -313,6 +313,8 @@ banco. Ver `LESSONS.md` (spec_deviation) para o registro do incidente.
 
 ### T6: Configurar Vitest (testes unitários)
 
+**Status**: ✅ Complete
+
 **What**: Instalar e configurar Vitest, adicionar script `test:unit` no
 `package.json`.
 **Where**: `vitest.config.ts`
@@ -325,11 +327,17 @@ banco. Ver `LESSONS.md` (spec_deviation) para o registro do incidente.
 - Skill: NONE
 
 **Done when**:
-- [ ] `npm run test:unit` roda e passa com um teste de exemplo
-- [ ] Config aponta para `src/features/**/__tests__/*.test.ts`
+- [x] `npm run test:unit` roda e passa com um teste de exemplo
+- [x] Config aponta para `src/features/**/__tests__/*.test.ts`
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: `vitest` mais recente (5.x) exige `@types/node@^22`,
+em conflito com o `@types/node@^20` já usado no projeto — fixado em
+`vitest@3.2.4`, última versão compatível com `@types/node@^20`. Teste de
+exemplo criado em `src/features/example/__tests__/example.test.ts` (é
+descartável assim que a primeira feature real tiver testes próprios).
 
 ---
 
