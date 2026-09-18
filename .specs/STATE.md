@@ -54,10 +54,10 @@
 ## Handoff
 
 - **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
-- **Phase / Task**: Phase 2 / T5 - Server Action signIn
-- **Completed**: T1, T2, T3, T4
+- **Phase / Task**: Phase 2 / T6 - Query getCurrentUserRole
+- **Completed**: T1, T2, T3, T4, T5
 - **In-progress**: none
-- **Next step**: Executar T5 (Server Action `signIn`)
+- **Next step**: Executar T6 (`getCurrentUserRole`)
 - **Blockers**: T7 do petmanager-mvp — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar o e2e de ponta a ponta
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main

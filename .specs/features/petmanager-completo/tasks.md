@@ -237,6 +237,8 @@ commit do T3, `state: READY`.
 
 ### T5: Server Action `signIn`
 
+**Status**: ✅ Complete
+
 **What**: Implementar a Server Action de login com e-mail/senha via
 Supabase Auth.
 **Where**: `src/features/auth/actions.ts`
@@ -249,9 +251,9 @@ Supabase Auth.
 - Skill: `better-auth-security-best-practices` (só os princípios genéricos de sessão/cookie que se aplicam — o projeto usa Supabase Auth, não a lib Better Auth)
 
 **Done when**:
-- [ ] Login com credenciais válidas autentica e retorna sucesso
-- [ ] Credenciais inválidas retornam mensagem genérica, sem indicar qual campo está errado
-- [ ] Testes unitários cobrindo os dois casos
+- [x] Login com credenciais válidas autentica e retorna sucesso
+- [x] Credenciais inválidas retornam mensagem genérica, sem indicar qual campo está errado — testado com duas causas de erro diferentes do Supabase (senha errada, usuário inexistente), ambas retornam a mesma string
+- [x] Testes unitários cobrindo os dois casos
 
 **Tests**: unit
 **Gate**: quick
