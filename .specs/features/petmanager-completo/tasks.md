@@ -204,6 +204,8 @@ lê/escreve a URL, sem lógica de tempo.
 
 ### T4: Deploy inicial (esqueleto) na Vercel
 
+**Status**: ✅ Complete
+
 **What**: Conectar o repositório à Vercel via Vercel MCP e configurar
 as variáveis de ambiente de produção.
 **Where**: Vercel project settings
@@ -216,11 +218,20 @@ as variáveis de ambiente de produção.
 - Skill: `vercel-react-best-practices`
 
 **Done when**:
-- [ ] Deploy de produção acessível via URL da Vercel
-- [ ] Variáveis de ambiente do Supabase configuradas em produção
+- [x] Deploy de produção acessível via URL da Vercel — `pet-manager-lucas-deiro-rodrigues-projects.vercel.app`
+- [x] Variáveis de ambiente do Supabase configuradas em produção
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: Projeto `pet-manager` já existia na Vercel (2
+deployments antigos com `ERROR`, de commits anteriores a esta feature —
+não mexidos). O conector Vercel MCP conseguiu criar/linkar o projeto,
+mas não tem permissão pra criar env var (`403 Forbidden` em
+`create_project_env`/`filter_project_envs`) — Lucas adicionou
+`NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+manualmente pelo dashboard. Deploy de produção disparado a partir do
+commit do T3, `state: READY`.
 
 ---
 

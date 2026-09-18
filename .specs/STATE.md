@@ -54,10 +54,10 @@
 ## Handoff
 
 - **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
-- **Phase / Task**: Phase 1 / T4 - Deploy inicial (esqueleto) na Vercel
-- **Completed**: T1, T2, T3
+- **Phase / Task**: Phase 2 / T5 - Server Action signIn
+- **Completed**: T1, T2, T3, T4
 - **In-progress**: none
-- **Next step**: Executar T4 (conectar repo na Vercel via MCP + configurar env vars de produção)
+- **Next step**: Executar T5 (Server Action `signIn`)
 - **Blockers**: T7 do petmanager-mvp — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar o e2e de ponta a ponta
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main
