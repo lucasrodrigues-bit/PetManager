@@ -343,6 +343,8 @@ descartável assim que a primeira feature real tiver testes próprios).
 
 ### T7: Configurar Playwright (testes e2e)
 
+**Status**: ✅ Complete (e2e run pendente de verificação fora do sandbox — ver nota)
+
 **What**: Instalar e configurar Playwright, adicionar script `test:e2e`
 no `package.json`.
 **Where**: `playwright.config.ts`
@@ -355,11 +357,22 @@ no `package.json`.
 - Skill: NONE
 
 **Done when**:
-- [ ] `npm run test:e2e` roda com um teste de exemplo (ex.: página inicial carrega)
-- [ ] Config aponta para `e2e/*.spec.ts`
+- [x] `npm run test:e2e` roda com um teste de exemplo (ex.: página inicial carrega) — config/script corretos, teste escrito; **execução real bloqueada neste sandbox** (ver nota)
+- [x] Config aponta para `e2e/*.spec.ts`
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: `@playwright/test` instalado, `playwright.config.ts`
+aponta pra `e2e/*.spec.ts` e sobe `npm run dev` como webServer. Teste de
+exemplo `e2e/home.spec.ts` escrito (verifica que a home carrega). O
+sandbox deste ambiente bloqueia o download do binário do Chromium
+(`npx playwright install` falha por allowlist de rede), então o teste
+não pôde rodar de ponta a ponta aqui — falhou exatamente no lugar
+esperado (`browserType.launch: Executable doesn't exist`), não por erro
+de config. Rodar `npx playwright install --with-deps && npm run test:e2e`
+localmente ou no CI (GitHub Actions) pra confirmar antes de considerar
+isso testado de verdade. `build` (gate real da task) passou normalmente.
 
 ---
 
