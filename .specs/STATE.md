@@ -34,6 +34,14 @@
 - **Date**: 2026-09-18
 - **Status**: active
 
+### AD-005
+- **Decision**: A partir do T8, nada vai direto pra `main`. Cada task (ou grupo pequeno de tasks bem relacionadas) roda numa branch `task/T<N>-<slug>`, sobe um PR, e só é integrada via **squash merge** depois que o gate da task (build/test) passa. A branch é apagada após o merge.
+- **Reason**: O software vai ser vendido — `main` devia ser sempre um estado confiável. PR (mesmo sem outro revisor humano, já que é projeto solo) cria um ponto de checagem antes de qualquer coisa entrar em `main`, e o squash mantém o histórico da main com 1 commit por task (fácil de ler/reverter).
+- **Trade-off**: Mais overhead por task num projeto solo (branch + PR + merge em vez de commit direto). Tentei habilitar branch protection na `main` via API pra forçar isso do lado do GitHub, mas o token fine-grained atual não tem permissão (`403 Resource not accessible`) — fica registrado que isso ainda não está tecnicamente bloqueado no GitHub, só é uma disciplina seguida manualmente. Lucas pode habilitar "Require pull request before merging" em Settings → Branches quando quiser forçar de verdade.
+- **Scope**: Todas as tasks do projeto PetManager, do T8 em diante.
+- **Date**: 2026-09-18
+- **Status**: active
+
 ## Handoff
 
 - **Feature**: petmanager-mvp
