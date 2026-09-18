@@ -42,13 +42,22 @@
 - **Date**: 2026-09-18
 - **Status**: active
 
+### AD-006
+- **Decision**: `petmanager-completo` (`.specs/features/petmanager-completo/`) substitui `petmanager-mvp` como fonte da verdade a partir de agora. Escopo confirmado com o usuário: **single-tenant** (mantido) + **expandido** com Área de Vendas unificada (produto + serviço), filtros de pesquisa em todas as listas principais, e exportação de relatório em PDF. `petmanager-mvp` permanece no repositório só como histórico — T1-T8 (infra: Next.js, Supabase, migrations `0001`-`0003`, RLS, Vitest, Playwright, cliente Supabase server-side) continuam válidos e são reaproveitados integralmente, referenciados como T1 em `petmanager-completo/tasks.md`.
+- **Reason**: Usuário validou um protótipo feito no v0.dev com donos de petshop reais e voltou com pedido explícito de expandir o escopo antes de seguir implementando. Reespecificar agora (antes de mais código) evita retrabalho maior depois.
+- **V0 prototype — o que foi analisado**: `app/page.tsx` de ~54 linhas (single-file, tudo client-side), sem backend real — autenticação fake com senha em texto puro no `localStorage`, todos os dados (tutores, pets, serviços, produtos, vendas, agendamentos, vacinas) vivendo só no `localStorage`, sem papéis dono/recepcionista, sem horário de funcionamento, sem ocultar preço interno no agendamento, sem trilha de estoque, relatório fixo no mês corrente (não navegável). **Nenhuma linha de código do protótipo foi reaproveitada** — serviu só de referência de UX (sidebar escura, destaque ciano, cards de métrica no dashboard, tela de Vendas e filtros de busca, que inspiraram diretamente as novas stories VEN/FILT desta spec).
+- **Trade-off**: Mudar a fonte de faturamento de "duas somas separadas" (agendamentos concluídos + saídas de estoque) para uma tabela `vendas` única exige uma migration nova (`0004_vendas.sql`, T20) e revisão da lógica de conclusão de agendamento (agora cria/estorna venda automaticamente) — mais uma migration antes de continuar as features de negócio, mas elimina uma classe inteira de bug de faturamento divergente.
+- **Scope**: Todo o desenvolvimento do PetManager a partir de T9 (numeração antiga) / T2 (numeração nova em `petmanager-completo`).
+- **Date**: 2026-09-18
+- **Status**: active
+
 ## Handoff
 
-- **Feature**: petmanager-mvp
-- **Phase / Task**: Phase 1 / T9 - Cliente Supabase browser-side
-- **Completed**: T1, T2, T3, T4, T5, T6, T7, T8
+- **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
+- **Phase / Task**: Phase 1 / T2 - Cliente Supabase browser-side
+- **Completed**: T1 (herança do petmanager-mvp T1-T8)
 - **In-progress**: none
-- **Next step**: Executar T9 (helper de cliente Supabase para Client Components)
-- **Blockers**: T7 — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar o e2e de ponta a ponta
-- **Uncommitted files**: none (tudo commitado após T8, via PR)
+- **Next step**: Executar T2 (helper de cliente Supabase para Client Components)
+- **Blockers**: T7 do petmanager-mvp — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar o e2e de ponta a ponta
+- **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main

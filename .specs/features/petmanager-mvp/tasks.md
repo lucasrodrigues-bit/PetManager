@@ -1,5 +1,11 @@
 # PetManager MVP Tasks
 
+> **Superseded a partir de T9** por `.specs/features/petmanager-completo/tasks.md`
+> (ver `STATE.md` AD-006). T1-T8 abaixo continuam válidos e concluídos —
+> são a fundação reaproveitada integralmente pela nova feature. T9-T40
+> abaixo ficam só como histórico do plano original; não executar — o
+> plano atual está em `petmanager-completo`.
+
 ## Execution Protocol (MANDATORY -- do not skip)
 
 Implement these tasks with the `tlc-spec-driven` skill: **activate it by
