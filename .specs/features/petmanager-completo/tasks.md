@@ -147,6 +147,8 @@ tabelas de domínio (T4), RLS completo (T5), Vitest (T6), Playwright
 
 ### T2: Criar cliente Supabase browser-side
 
+**Status**: ✅ Complete
+
 **What**: Criar o helper de cliente Supabase para uso em Client
 Components.
 **Where**: `src/shared/supabase/client.ts`
@@ -159,8 +161,8 @@ Components.
 - Skill: NONE
 
 **Done when**:
-- [ ] Cliente inicializa sem erro no browser
-- [ ] Sessão sincroniza com o cliente server-side
+- [x] Cliente inicializa sem erro no browser — `createBrowserClient` do `@supabase/ssr`, sem estado próprio de sessão (compartilha cookies com o server)
+- [x] Sessão sincroniza com o cliente server-side — mesmo mecanismo de cookies do `shared/supabase/server.ts` (T8), nada duplicado
 
 **Tests**: none
 **Gate**: build

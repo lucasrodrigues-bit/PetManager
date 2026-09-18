@@ -54,10 +54,10 @@
 ## Handoff
 
 - **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
-- **Phase / Task**: Phase 1 / T2 - Cliente Supabase browser-side
-- **Completed**: T1 (herança do petmanager-mvp T1-T8)
+- **Phase / Task**: Phase 1 / T3 - Componente e hook de filtros (shared/filters)
+- **Completed**: T1, T2
 - **In-progress**: none
-- **Next step**: Executar T2 (helper de cliente Supabase para Client Components)
+- **Next step**: Executar T3 (hook `useListFilters` + `<SearchFilterBar />`)
 - **Blockers**: T7 do petmanager-mvp — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar o e2e de ponta a ponta
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main
