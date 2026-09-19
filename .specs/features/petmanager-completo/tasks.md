@@ -709,8 +709,11 @@ somada à RLS que já bloqueia no banco (T5/T20).
 
 ### T20: Migration — tabela `vendas` + função `registrar_venda_produto`
 
-**What**: Criar a tabela `vendas`, as colunas novas (`produtos.estoque_minimo`,
-`movimentacoes_estoque.venda_id`), a função Postgres transacional
+**Status**: ✅ Complete
+
+**What**: Criar a tabela `vendas`, a coluna nova
+(`movimentacoes_estoque.venda_id` — `produtos.categoria`/`estoque_minimo`
+já foram adicionados no T18), a função Postgres transacional
 `registrar_venda_produto(produto_id, quantidade)` e as RLS policies da
 tabela nova.
 **Where**: `supabase/migrations/0005_vendas.sql`
@@ -723,13 +726,26 @@ tabela nova.
 - Skill: `supabase-postgres-best-practices`, `find-security-vulnerabilities-in-code`
 
 **Done when**:
-- [ ] Migration aditiva (sem `DROP`/`ALTER ... NOT NULL` sem `DEFAULT`) — não quebra dados já existentes
-- [ ] `registrar_venda_produto` é atômica: saldo insuficiente reverte tudo (nenhuma linha órfã em `vendas`/`movimentacoes_estoque`)
-- [ ] RLS de `vendas`: leitura para `authenticated`; escrita de `tipo = 'produto'` restrita a `dono`; nenhum INSERT direto de `tipo = 'servico'` pelo cliente (só via função chamada pelo Server Action de concluir agendamento, T29)
-- [ ] `get_advisors` (Supabase) sem novos alertas de segurança
+- [x] Migration aditiva (sem `DROP`/`ALTER ... NOT NULL` sem `DEFAULT`) — não quebra dados já existentes
+- [x] `registrar_venda_produto` é atômica: saldo insuficiente reverte tudo (nenhuma linha órfã em `vendas`/`movimentacoes_estoque`) — testado manualmente: venda de 2 unidades ok (saldo 5→3), tentativa de 999 unidades rejeitada (`Saldo insuficiente`), saldo/contagens inalterados depois
+- [x] RLS de `vendas`: leitura para `authenticated`; escrita de `tipo = 'produto'` restrita a `dono`; nenhum INSERT direto de `tipo = 'servico'` pelo cliente (nenhuma policy de insert cobre esse caso — só uma função `security definer`, a ser criada no T28, vai poder inserir)
+- [x] `get_advisors` (Supabase) sem novos alertas de segurança — `{"lints": []}`
 
 **Tests**: none
 **Gate**: build
+
+**Notas de execução**: `vendas_agendamento_unique` (UNIQUE em
+`agendamento_id`, nullable) garante no máximo 1 venda por agendamento
+sem impedir múltiplas vendas de produto (que têm `agendamento_id`
+sempre null — Postgres permite múltiplos NULLs numa unique
+constraint). `registrar_venda_produto` é `security invoker` de
+propósito: roda com o papel de quem chama, então a RLS de
+`produtos`/`vendas` já barra `recepcionista` sem duplicar a checagem de
+papel dentro da função. **Importante para o T28**: a função de concluir
+agendamento (que insere venda `tipo='servico'`) vai precisar ser
+`security definer` — a RLS de `vendas` não tem nenhuma policy de insert
+pra esse tipo de propósito, então só uma função com privilégio elevado
+consegue escrever ali.
 
 ---
 
