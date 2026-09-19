@@ -554,6 +554,8 @@ correto desaparecer do dropdown.
 
 ### T15: Server Action `criarServico`
 
+**Status**: ✅ Complete
+
 **What**: Cadastro de serviço com preço interno.
 **Where**: `src/features/servicos/actions.ts`
 **Depends on**: T14
@@ -565,9 +567,9 @@ correto desaparecer do dropdown.
 - Skill: `mastering-typescript`
 
 **Done when**:
-- [ ] Serviço criado com nome e preço válidos
-- [ ] Rejeita preço negativo ou não numérico
-- [ ] Teste unitário cobrindo os dois ACs
+- [x] Serviço criado com nome e preço válidos
+- [x] Rejeita preço negativo ou não numérico
+- [x] Teste unitário cobrindo os dois ACs
 
 **Tests**: unit
 **Gate**: quick
