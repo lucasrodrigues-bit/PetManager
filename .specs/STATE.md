@@ -62,10 +62,10 @@
 ## Handoff
 
 - **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
-- **Phase / Task**: Phase 3 / T12 - Server Action criarPet
-- **Completed**: T1-T11
+- **Phase / Task**: Phase 3 / T13 - Query getPets/getTutores filtrados
+- **Completed**: T1-T12
 - **In-progress**: none
-- **Next step**: Executar T12 (cadastro de pet vinculado a tutor)
+- **Next step**: Executar T13 (queries com busca textual via shared/filters)
 - **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main

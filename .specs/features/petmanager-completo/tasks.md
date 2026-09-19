@@ -459,6 +459,8 @@ digitado — evita duplicidade por formatação diferente na busca (T13).
 
 ### T12: Server Action `criarPet`
 
+**Status**: ✅ Complete
+
 **What**: Cadastro de pet vinculado a um tutor existente.
 **Where**: `src/features/pets/actions.ts`
 **Depends on**: T11
@@ -470,12 +472,16 @@ digitado — evita duplicidade por formatação diferente na busca (T13).
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Pet criado com nome, raça e porte válidos
-- [ ] Rejeita `tutorId` inexistente
-- [ ] Teste unitário cobrindo os dois casos
+- [x] Pet criado com nome, raça e porte válidos
+- [x] Rejeita `tutorId` inexistente
+- [x] Teste unitário cobrindo os dois casos
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: `tutorId` inexistente é pego pela FK do banco
+(`pets.tutor_id -> tutores.id`, código de erro Postgres `23503`) —
+traduzido pra mensagem amigável em vez de deixar vazar o erro cru.
 
 ---
 
