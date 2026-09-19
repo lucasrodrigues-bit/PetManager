@@ -487,6 +487,8 @@ traduzido pra mensagem amigável em vez de deixar vazar o erro cru.
 
 ### T13: Query `getPets`/`getTutores` filtrados
 
+**Status**: ✅ Complete
+
 **What**: Consultas de tutores/pets com busca textual (nome/telefone),
 usando `shared/filters`.
 **Where**: `src/features/pets/queries.ts`
@@ -499,11 +501,18 @@ usando `shared/filters`.
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Busca por nome/telefone retorna resultados corretos
-- [ ] Teste unitário cobrindo busca vazia e com termo
+- [x] Busca por nome/telefone retorna resultados corretos
+- [x] Teste unitário cobrindo busca vazia e com termo
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: `getTutores(busca)` filtra por nome OU telefone
+(`.or()`, já que tutor tem os dois campos); `getPets(busca)` filtra só
+por nome (pet não tem telefone). `getPets` também já filtra
+`ativo = true` (pets inativados não aparecem — consistente com o edge
+case da spec "impedir seleção de pets inativos"). A busca em si
+(`shared/filters`) entra na tela no T14.
 
 ---
 
