@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { criarTutor } from "../actions";
+import { criarTutor, criarPet } from "../actions";
 
 const single = vi.fn();
 const select = vi.fn(() => ({ single }));
@@ -40,5 +40,34 @@ describe("criarTutor", () => {
 
     expect(result.error).toBe("O nome não pode ter mais de 255 caracteres.");
     expect(from).not.toHaveBeenCalled();
+  });
+});
+
+describe("criarPet", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("cadastra pet vinculado a tutor existente", async () => {
+    single.mockResolvedValue({ data: { id: 10 }, error: null });
+
+    const result = await criarPet({ tutorId: 1, nome: "Rex", raca: "Vira-lata", porte: "medio" });
+
+    expect(result.error).toBeUndefined();
+    expect(result.id).toBe(10);
+    expect(insert).toHaveBeenCalledWith({
+      tutor_id: 1,
+      nome: "Rex",
+      raca: "Vira-lata",
+      porte: "medio",
+    });
+  });
+
+  it("rejeita tutorId inexistente (violação de FK)", async () => {
+    single.mockResolvedValue({ data: null, error: { code: "23503" } });
+
+    const result = await criarPet({ tutorId: 999, nome: "Rex", raca: "Vira-lata", porte: "medio" });
+
+    expect(result.error).toBe("Tutor não encontrado. Selecione um tutor já cadastrado.");
   });
 });
