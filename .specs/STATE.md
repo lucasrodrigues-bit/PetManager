@@ -62,10 +62,10 @@
 ## Handoff
 
 - **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
-- **Phase / Task**: Phase 2 / T8 - Página de login
-- **Completed**: T1, T2, T3, T4, T5, T6, T7
+- **Phase / Task**: Phase 3 / T9 - Server Action salvarHorario
+- **Completed**: T1, T2, T3, T4, T5, T6, T7, T8
 - **In-progress**: none
-- **Next step**: Executar T8 (tela de login, chama `signIn`)
-- **Blockers**: T7 do petmanager-mvp e T7 desta feature — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar os e2e de ponta a ponta; T7 desta feature também precisa de T8-T14 pra testar dono-vs-recepcionista com sessão real
+- **Next step**: Executar T9 (cadastro de horário de funcionamento)
+- **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main

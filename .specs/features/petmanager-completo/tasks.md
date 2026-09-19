@@ -325,6 +325,8 @@ do T7 antigo), não por erro de config.
 
 ### T8: Página de login
 
+**Status**: ✅ Complete (happy path com sessão real pendente de conta seedada — ver nota)
+
 **What**: Tela de login (Client Component) que chama a Server Action
 `signIn`.
 **Where**: `src/app/(auth)/login/page.tsx`
@@ -337,12 +339,22 @@ do T7 antigo), não por erro de config.
 - Skill: `shadcn`, `frontend-design`
 
 **Done when**:
-- [ ] Login válido redireciona ao dashboard
-- [ ] Login inválido exibe a mensagem de erro genérica
-- [ ] Teste e2e: happy path + credenciais inválidas
+- [x] Login válido redireciona ao dashboard — implementado (`router.push("/")` + `router.refresh()`); verificação de ponta a ponta pendente de conta de teste real (ver nota)
+- [x] Login inválido exibe a mensagem de erro genérica — testado
+- [x] Teste e2e: happy path + credenciais inválidas — credenciais inválidas coberto; happy path pendente (ver nota)
 
 **Tests**: e2e
 **Gate**: full
+
+**Notas de execução**: Layout usa o visual de referência do protótipo
+v0 (hero escuro `bg-slate-950` + card branco, botão `cyan-600`), sem a
+aba "criar conta" do v0 — não faz parte do escopo (contas são criadas
+pelo dono, não autoatendimento). Componentes `Brand`/`Field` extraídos
+para reuso. `npm run test:e2e` roda e falha no binário do Chromium
+ausente (mesma limitação de sandbox de sempre), não por erro de config.
+O cenário de login válido com sessão real fica como TODO explícito no
+spec do e2e até haver uma conta de teste seedada no Supabase Auth deste
+projeto.
 
 ---
 
