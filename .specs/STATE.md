@@ -62,10 +62,10 @@
 ## Handoff
 
 - **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
-- **Phase / Task**: Phase 2 / T7 - Middleware de proteção de rota por papel
-- **Completed**: T1, T2, T3, T4, T5, T6
+- **Phase / Task**: Phase 2 / T8 - Página de login
+- **Completed**: T1, T2, T3, T4, T5, T6, T7
 - **In-progress**: none
-- **Next step**: Executar T7 (middleware bloqueando `recepcionista` de estoque/vendas de produto/relatórios)
-- **Blockers**: T7 do petmanager-mvp — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar o e2e de ponta a ponta
+- **Next step**: Executar T8 (tela de login, chama `signIn`)
+- **Blockers**: T7 do petmanager-mvp e T7 desta feature — rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar os e2e de ponta a ponta; T7 desta feature também precisa de T8-T14 pra testar dono-vs-recepcionista com sessão real
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main
