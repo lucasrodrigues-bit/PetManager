@@ -360,6 +360,8 @@ projeto.
 
 ### T9: Server Action `salvarHorario`
 
+**Status**: ✅ Complete
+
 **What**: Cadastrar/editar horários de funcionamento, validando que
 fechamento > abertura.
 **Where**: `src/features/horario-funcionamento/actions.ts`
@@ -372,12 +374,20 @@ fechamento > abertura.
 - Skill: NONE
 
 **Done when**:
-- [ ] Salva corretamente dia + horário de abertura/fechamento
-- [ ] Rejeita fechamento anterior à abertura, com mensagem de erro
-- [ ] Testes unitários cobrindo os dois ACs
+- [x] Salva corretamente dia + horário de abertura/fechamento
+- [x] Rejeita fechamento anterior à abertura, com mensagem de erro
+- [x] Testes unitários cobrindo os dois ACs (+ update vs insert)
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Upsert manual (select por `dia_semana` → update
+ou insert) — a tabela não tem constraint de unicidade em `dia_semana`,
+então `ON CONFLICT` do Supabase não se aplicaria; ficou fora do escopo
+desta task adicionar essa constraint (não estava no `Where` planejado).
+A validação de fechamento > abertura já existe como `CHECK` no banco
+(migration `0002`) — a Server Action reforça isso antes, só pra dar
+mensagem amigável e evitar round-trip desnecessário.
 
 ---
 
