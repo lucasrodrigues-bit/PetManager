@@ -62,10 +62,10 @@
 ## Handoff
 
 - **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
-- **Phase / Task**: Phase 3 / T17 - Tela de cadastro de serviços
-- **Completed**: T1-T16
+- **Phase / Task**: Phase 4 / T18 - Server Action criarProduto + registrarEntrada
+- **Completed**: T1-T17 (Fases 1-3 completas)
 - **In-progress**: none
-- **Next step**: Executar T17 (última task da Fase 3 — tela de serviços)
+- **Next step**: Executar T18 (início da Fase 4: Estoque + migration de Vendas)
 - **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main
