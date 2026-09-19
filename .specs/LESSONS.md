@@ -20,6 +20,12 @@ Seen once or not yet corroborated. Tracked, not trusted.
 - evidence: supabase/migrations (T5 gap, 2026-09-18)
 - last seen: 2026-09-18T01:03:47Z
 
+### L-002 - Ao planejar migrations em fases separadas, checar se uma task anterior ja depende de colunas so previstas pra uma migration futura - sequenciar a migration antes da task que precisa dela, nao junto com outra feature maior.
+- signal: `spec_deviation` · recurrence: 1 feature(s) · harmful: 0
+- features: petmanager-completo
+- evidence: design.md data model (produtos.categoria/estoque_minimo, T18 vs T20)
+- last seen: 2026-09-19T19:42:41Z
+
 ## Quarantined (failed when applied - ignore)
 
 A confirmed lesson that recurred alongside failure. Kept for the maintainer to review.
