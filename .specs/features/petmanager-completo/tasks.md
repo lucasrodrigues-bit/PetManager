@@ -429,6 +429,8 @@ escopo desta task.
 
 ### T11: Server Action `criarTutor`
 
+**Status**: ✅ Complete
+
 **What**: Cadastro de tutor, validando telefone BR com
 `libphonenumber-js`.
 **Where**: `src/features/pets/actions.ts`
@@ -441,13 +443,17 @@ escopo desta task.
 - Skill: `mastering-typescript`
 
 **Done when**:
-- [ ] Cadastro aceito com telefone BR válido
-- [ ] Cadastro rejeitado com telefone inválido, indicando o formato esperado
-- [ ] Nome limitado a 255 caracteres
-- [ ] Testes unitários cobrindo os três ACs
+- [x] Cadastro aceito com telefone BR válido
+- [x] Cadastro rejeitado com telefone inválido, indicando o formato esperado
+- [x] Nome limitado a 255 caracteres
+- [x] Testes unitários cobrindo os três ACs
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Telefone salvo normalizado em E.164
+(`+55DDXXXXXXXXX`) via `libphonenumber-js`, independente de como foi
+digitado — evita duplicidade por formatação diferente na busca (T13).
 
 ---
 
