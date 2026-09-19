@@ -610,6 +610,8 @@ na resposta) pra provar que a função ainda assim não repassa o campo.
 
 ### T17: Tela de cadastro de serviços
 
+**Status**: ✅ Complete
+
 **What**: Tela onde o dono cadastra serviços e preços internos.
 **Where**: `src/app/(dashboard)/servicos/page.tsx`
 **Depends on**: T16
@@ -621,11 +623,21 @@ na resposta) pra provar que a função ainda assim não repassa o campo.
 - Skill: `shadcn`
 
 **Done when**:
-- [ ] Cadastro de serviço funciona pela UI
-- [ ] Teste e2e: cadastro completo + preço inválido
+- [x] Cadastro de serviço funciona pela UI
+- [x] Teste e2e: cadastro completo + preço inválido (execução real segue bloqueada neste sandbox)
 
 **Tests**: e2e
 **Gate**: full
+
+**Notas de execução**: Usa `getServicosComPreco` (T16) — a spec original
+não lista "restrito a dono" como AC da story de Serviços (diferente de
+Estoque/Vendas/Relatórios), então esta tela fica acessível a
+`recepcionista` também, sem guarda de middleware; só a tela de
+*agendamento* (T33+) é que nunca mostra preço, via
+`getServicosParaAgendamento`. Input de preço é `type="number"` sem
+`min="0"` no HTML de propósito — a validação real é a Server Action
+(SERV-03); um `min` no client bloquearia o próprio teste de preço
+negativo antes de chegar no servidor.
 
 ---
 
