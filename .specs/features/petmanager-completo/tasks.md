@@ -135,7 +135,7 @@ tabelas de domínio (T4), RLS completo (T5), Vitest (T6), Playwright
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `software-architecture`
 
 **Done when**:
 - [x] Confirmado que `npm run build`, `npm run test:unit` e as migrations `0001`-`0003` seguem válidos nesta branch
@@ -158,7 +158,7 @@ Components.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `mastering-typescript`
 
 **Done when**:
 - [x] Cliente inicializa sem erro no browser — `createBrowserClient` do `@supabase/ssr`, sem estado próprio de sessão (compartilha cookies com o server)
@@ -273,7 +273,7 @@ do usuário autenticado, lendo da tabela `profiles`.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `supabase-postgres-best-practices`
 
 **Done when**:
 - [x] Retorna `null` se não autenticado
@@ -371,7 +371,7 @@ fechamento > abertura.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `supabase-postgres-best-practices`
 
 **Done when**:
 - [x] Salva corretamente dia + horário de abertura/fechamento
@@ -425,7 +425,7 @@ cadastra/edita.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `mastering-typescript`
 
 **Done when**:
 - [ ] Cadastro aceito com telefone BR válido
@@ -448,7 +448,7 @@ cadastra/edita.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `supabase-postgres-best-practices`
 
 **Done when**:
 - [ ] Pet criado com nome, raça e porte válidos
@@ -515,7 +515,7 @@ usando `shared/filters`.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `mastering-typescript`
 
 **Done when**:
 - [ ] Serviço criado com nome e preço válidos
@@ -538,7 +538,7 @@ restrito a dono).
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `find-security-vulnerabilities-in-code`
 
 **Done when**:
 - [ ] `getServicosParaAgendamento` nunca retorna o campo de preço
@@ -582,7 +582,7 @@ estoque.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `supabase-postgres-best-practices`
 
 **Done when**:
 - [ ] Produto criado com nome, categoria, preço e estoque mínimo
@@ -679,7 +679,7 @@ tratando o erro de saldo insuficiente.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `supabase-postgres-best-practices`
 
 **Done when**:
 - [ ] Venda de produto registrada com sucesso debita o estoque corretamente
@@ -750,7 +750,7 @@ expediente cadastrado.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `software-architecture`
 
 **Done when**:
 - [ ] Agendamento criado com status inicial "agendado"
@@ -774,7 +774,7 @@ gerar venda).
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `mastering-typescript`
 
 **Done when**:
 - [ ] Edição preserva `id` e reflete mudanças corretamente
@@ -796,7 +796,7 @@ gerar venda).
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `mastering-typescript`
 
 **Done when**:
 - [ ] Agendamento cancelado volta a "agendado"
@@ -843,7 +843,7 @@ T20).
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `supabase-postgres-best-practices`
 
 **Done when**:
 - [ ] Reabrir remove a venda associada, faturamento não fica inflado
@@ -866,7 +866,7 @@ ocupados).
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `supabase-postgres-best-practices`
 
 **Done when**:
 - [ ] Retorna todos os agendamentos do dia, incluindo cancelados (exibição visual diferenciada)
@@ -980,7 +980,7 @@ histórico por pet.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `supabase-postgres-best-practices`
 
 **Done when**:
 - [ ] Vacina salva com data de aplicação e retorno previsto
@@ -1098,7 +1098,7 @@ tela.
 
 **Tools**:
 - MCP: NONE
-- Skill: NONE
+- Skill: `documentation-writer`
 
 **Done when**:
 - [ ] Download do PDF funciona para um mês com dados e um mês vazio
