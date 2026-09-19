@@ -578,6 +578,8 @@ correto desaparecer do dropdown.
 
 ### T16: Queries `getServicosParaAgendamento`/`getServicosComPreco`
 
+**Status**: ✅ Complete
+
 **What**: Query sem preço (agendamento) e query com preço (uso
 restrito a dono).
 **Where**: `src/features/servicos/queries.ts`
@@ -590,12 +592,19 @@ restrito a dono).
 - Skill: `find-security-vulnerabilities-in-code`
 
 **Done when**:
-- [ ] `getServicosParaAgendamento` nunca retorna o campo de preço
-- [ ] `getServicosComPreco` retorna preço corretamente
-- [ ] Teste unitário garantindo que o preço não vaza
+- [x] `getServicosParaAgendamento` nunca retorna o campo de preço
+- [x] `getServicosComPreco` retorna preço corretamente
+- [x] Teste unitário garantindo que o preço não vaza
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Duas camadas de proteção em
+`getServicosParaAgendamento` — o `select()` já não pede
+`preco_interno`, e o `.map()` descarta qualquer campo extra que um
+`select` futuro (ex.: um `select("*")` por engano) venha a trazer. O
+teste simula exatamente esse cenário (banco "vazando" `preco_interno`
+na resposta) pra provar que a função ainda assim não repassa o campo.
 
 ---
 
