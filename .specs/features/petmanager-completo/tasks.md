@@ -643,6 +643,8 @@ negativo antes de chegar no servidor.
 
 ### T18: Server Action `criarProduto` + `registrarEntrada`
 
+**Status**: ✅ Complete
+
 **What**: Cadastro de produto (com `estoqueMinimo`) e entrada de
 estoque.
 **Where**: `src/features/estoque/actions.ts`
@@ -651,16 +653,27 @@ estoque.
 **Requirement**: EST-01
 
 **Tools**:
-- MCP: NONE
+- MCP: `Supabase`
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Produto criado com nome, categoria, preço e estoque mínimo
-- [ ] Entrada soma corretamente ao saldo
-- [ ] Testes unitários cobrindo os dois ACs
+- [x] Produto criado com nome, categoria, preço e estoque mínimo
+- [x] Entrada soma corretamente ao saldo
+- [x] Testes unitários cobrindo os dois ACs
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: **Correção de sequenciamento encontrada e
+corrigida antes de codar**: `produtos` ainda não tinha `categoria` nem
+`estoque_minimo` — esses campos estavam planejados pra entrar só na
+migration do T20 (`0004_vendas.sql`), mas o T18 já precisa deles.
+Aplicada uma migration pequena e aditiva agora
+(`0004_produto_categoria_estoque_minimo.sql`, via Supabase MCP,
+`DEFAULT` em ambas as colunas — nenhum dado quebra), e a migration do
+T20 foi renumerada pra `0005_vendas.sql` em `design.md` e `tasks.md`.
+`registrarEntrada` é select-then-update (não atômico) — mesmo risco de
+concorrência já aceito na agenda, aceito aqui também.
 
 ---
 
@@ -694,7 +707,7 @@ e flag de estoque baixo, restrita ao papel `dono` na própria action.
 `movimentacoes_estoque.venda_id`), a função Postgres transacional
 `registrar_venda_produto(produto_id, quantidade)` e as RLS policies da
 tabela nova.
-**Where**: `supabase/migrations/0004_vendas.sql`
+**Where**: `supabase/migrations/0005_vendas.sql`
 **Depends on**: T19
 **Reuses**: `current_role_petmanager()` (função já existente, AD-003)
 **Requirement**: VEN-01, VEN-02, VEN-03, VEN-04

@@ -3,7 +3,7 @@
   "promote_threshold": 2,
   "window_days": 45,
   "quarantine_threshold": 2,
-  "next_id": 2,
+  "next_id": 3,
   "lessons": [
     {
       "id": "L-001",
@@ -22,6 +22,24 @@
       ],
       "created": "2026-09-18T01:03:47Z",
       "last_seen": "2026-09-18T01:03:47Z"
+    },
+    {
+      "id": "L-002",
+      "key": "spec_deviation::ao planejar migrations em fases separadas checar se uma task anterior ja depende de colunas so previstas pra uma migration futura sequenciar a migration antes da task que precisa dela nao junto com outra feature maior",
+      "text": "Ao planejar migrations em fases separadas, checar se uma task anterior ja depende de colunas so previstas pra uma migration futura - sequenciar a migration antes da task que precisa dela, nao junto com outra feature maior.",
+      "signal": "spec_deviation",
+      "scope": "",
+      "status": "candidate",
+      "features": [
+        "petmanager-completo"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "design.md data model (produtos.categoria/estoque_minimo, T18 vs T20)"
+      ],
+      "created": "2026-09-19T19:42:41Z",
+      "last_seen": "2026-09-19T19:42:41Z"
     }
   ]
 }

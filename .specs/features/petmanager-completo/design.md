@@ -206,8 +206,10 @@ exatamente um de `agendamentoId`/`produtoId` deve ser não-nulo por
 venda (`CHECK` no banco, coerente com `tipo`).
 
 **Migration nova necessária** (fase Execute, tarefa a definir):
-`0004_vendas.sql` — cria tabela `vendas`, adiciona `estoque_minimo` e
-`venda_id` em `produtos`/`movimentacoes_estoque`, cria a função
+`0005_vendas.sql` — cria tabela `vendas`, adiciona `venda_id` em
+`movimentacoes_estoque` (categoria e estoque_minimo em `produtos` já
+foram adicionados antes, na `0004_produto_categoria_estoque_minimo.sql`,
+T18 — ver correção de sequenciamento em `STATE.md`), cria a função
 Postgres `registrar_venda_produto(produto_id, quantidade)` (transação
 atômica: valida saldo, insere `venda`, insere `movimentacao_estoque`,
 debita `produtos.saldo_estoque` — tudo ou nada), e as RLS policies
@@ -240,7 +242,7 @@ abordagem, só novas policies na tabela nova.
 | Concern | Location | Impact | Mitigation |
 |---|---|---|---|
 | Lógica de "venda automática ao concluir" e "estorno ao reabrir" fica sensível a duplicar/perder venda se o Server Action falhar no meio | `features/agenda/actions.ts`, `features/vendas/actions.ts` | Faturamento incorreto sem o dono perceber | Concentrar a criação/remoção da venda numa função Postgres transacional (mesma técnica de `registrar_venda_produto`), não em múltiplas queries separadas do lado da aplicação |
-| Migration `0004_vendas.sql` mexe em tabelas que já têm dados reais em produção (se o petshop-piloto já estiver usando) | `supabase/migrations/0004_vendas.sql` | Precisa rodar sem perder dado existente | Migration aditiva só (novas colunas nullable, nova tabela) — nenhum `DROP`/`ALTER ... NOT NULL` sem `DEFAULT` |
+| Migration `0005_vendas.sql` mexe em tabelas que já têm dados reais em produção (se o petshop-piloto já estiver usando) | `supabase/migrations/0005_vendas.sql` | Precisa rodar sem perder dado existente | Migration aditiva só (novas colunas nullable, nova tabela) — nenhum `DROP`/`ALTER ... NOT NULL` sem `DEFAULT` |
 | Geração de PDF pode ficar lenta/pesada se a lib escolhida carregar muita coisa no cold start da serverless function | `shared/pdf/relatorio-pdf.tsx` | Timeout em relatórios de meses com muitos dados | Lib pura JS sem dependência de browser (ver Tech Decisions); se necessário, paginar o PDF por seção |
 | Sem trava de concorrência na agenda (herdado, aceito) | `features/agenda/actions.ts` | Mesmo risco do MVP original | Mesma mitigação: aceito, `unique constraint` como follow-up se virar problema real |
 
