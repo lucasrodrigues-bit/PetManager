@@ -679,6 +679,8 @@ concorrência já aceito na agenda, aceito aqui também.
 
 ### T19: Query `getProdutos` filtrada (restrita a dono)
 
+**Status**: ✅ Complete
+
 **What**: Consulta de produtos com busca/categoria (`shared/filters`)
 e flag de estoque baixo, restrita ao papel `dono` na própria action.
 **Where**: `src/features/estoque/queries.ts`
@@ -691,13 +693,17 @@ e flag de estoque baixo, restrita ao papel `dono` na própria action.
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] `dono` recebe a lista normalmente, com `estoqueBaixo` calculado
-- [ ] `recepcionista` recebe erro/lista vazia (nunca dado real)
-- [ ] Busca e filtro por categoria funcionam combinados
-- [ ] Teste unitário cobrindo os três ACs
+- [x] `dono` recebe a lista normalmente, com `estoqueBaixo` calculado
+- [x] `recepcionista` recebe erro/lista vazia (nunca dado real)
+- [x] Busca e filtro por categoria funcionam combinados
+- [x] Teste unitário cobrindo os três ACs
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: `recepcionista` recebe `[]` sem sequer chamar o
+banco (checagem de papel antes do `from()`) — defesa em profundidade
+somada à RLS que já bloqueia no banco (T5/T20).
 
 ---
 
