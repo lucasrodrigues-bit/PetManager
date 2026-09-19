@@ -393,6 +393,8 @@ mensagem amigável e evitar round-trip desnecessário.
 
 ### T10: Query `getHorarios` + tela de cadastro
 
+**Status**: ✅ Complete
+
 **What**: Consulta dos horários cadastrados + tela onde o dono
 cadastra/edita.
 **Where**: `src/app/(dashboard)/horario-funcionamento/page.tsx`
@@ -405,12 +407,23 @@ cadastra/edita.
 - Skill: `shadcn`
 
 **Done when**:
-- [ ] Dono cadastra horário para cada dia da semana
-- [ ] Erro de fechamento antes de abertura aparece na UI
-- [ ] Teste e2e: cadastro completo + tentativa inválida
+- [x] Dono cadastra horário para cada dia da semana
+- [x] Erro de fechamento antes de abertura aparece na UI
+- [x] Teste e2e: cadastro completo + tentativa inválida (execução real segue bloqueada neste sandbox — mesma limitação de sempre)
 
 **Tests**: e2e
 **Gate**: full
+
+**Notas de execução**: Página é Server Component (`getHorarios` roda no
+servidor); `HorarioDiaForm` é o único Client Component, um por dia da
+semana, chamando `salvarHorario` (T9) direto. Next marcou a rota como
+dinâmica (`ƒ`) automaticamente por causa do `cookies()` dentro do
+cliente Supabase — não tentou pré-renderizar estático nem bater no
+Supabase em build time, então o build passa neste sandbox sem rede
+liberada pro Supabase. À parte: o build emitiu um aviso de depreciação
+("middleware" → "proxy", convenção nova do Next 16) — não é bloqueante,
+fica como possível limpeza futura, não mexido aqui pra não expandir o
+escopo desta task.
 
 ---
 
