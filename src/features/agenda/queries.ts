@@ -55,3 +55,75 @@ export async function getAgendamentosPorDia(data: string): Promise<AgendamentoDo
       .filter((nome): nome is string => Boolean(nome)),
   }));
 }
+
+export interface AgendamentoFiltrado {
+  id: number;
+  petNome: string;
+  tutorNome: string;
+  dataHora: string;
+  status: "agendado" | "concluido" | "cancelado";
+}
+
+interface RowTutor {
+  nome: string;
+}
+
+interface RowPetComTutor {
+  nome: string;
+  tutores: RowTutor | null;
+}
+
+interface AgendamentoFiltradoRow {
+  id: number;
+  data_hora: string;
+  status: "agendado" | "concluido" | "cancelado";
+  pets: RowPetComTutor | null;
+}
+
+interface GetAgendamentosFiltrado {
+  busca?: string;
+  status?: "agendado" | "concluido" | "cancelado";
+}
+
+/**
+ * Lista de agendamentos pra tela de listagem (distinta da visão diária
+ * do `getAgendamentosPorDia`), com busca por pet/tutor e filtro por
+ * status (AGD-09, FILT-01, FILT-02). `status` filtra via SQL; `busca`
+ * roda em memória sobre o nome já resolvido — mesmo padrão de
+ * `getVendas` (T23), já que o nome do tutor vem de um join em duas
+ * camadas (`pets` → `tutores`).
+ */
+export async function getAgendamentosFiltrados(
+  filtro: GetAgendamentosFiltrado = {},
+): Promise<AgendamentoFiltrado[]> {
+  const supabase = await createClient();
+
+  let query = supabase
+    .from("agendamentos")
+    .select("id, data_hora, status, pets ( nome, tutores ( nome ) )")
+    .order("data_hora", { ascending: false });
+
+  if (filtro.status) {
+    query = query.eq("status", filtro.status);
+  }
+
+  const { data } = await query;
+  const rows = (data ?? []) as unknown as AgendamentoFiltradoRow[];
+
+  const agendamentos: AgendamentoFiltrado[] = rows.map((row) => ({
+    id: row.id,
+    petNome: row.pets?.nome ?? "Pet removido",
+    tutorNome: row.pets?.tutores?.nome ?? "Tutor removido",
+    dataHora: row.data_hora,
+    status: row.status,
+  }));
+
+  if (!filtro.busca) {
+    return agendamentos;
+  }
+
+  const termo = filtro.busca.toLowerCase();
+  return agendamentos.filter(
+    (a) => a.petNome.toLowerCase().includes(termo) || a.tutorNome.toLowerCase().includes(termo),
+  );
+}
