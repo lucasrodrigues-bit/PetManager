@@ -69,10 +69,10 @@
 
 ## Handoff
 
-- **Phase / Task**: Phase 6 / T25 - Server Action criarAgendamento
-- **Completed**: T1-T24 (Fases 1-5 completas)
+- **Phase / Task**: Phase 6 / T26 - Server Actions editarAgendamento/cancelarAgendamento
+- **Completed**: T1-T25
 - **In-progress**: none
-- **Next step**: Executar T25 (início da Fase 6: Agenda)
+- **Next step**: Executar T26
 - **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main
