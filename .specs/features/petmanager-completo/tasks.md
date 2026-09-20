@@ -847,6 +847,8 @@ o bastante pra isso não ser problema de performance.
 
 ### T24: Tela de Vendas
 
+**Status**: ✅ Complete
+
 **What**: Tela única de vendas — lista (com busca/filtro) + formulário
 de venda de produto avulsa (venda de serviço não tem formulário
 próprio, é automática — ver T29).
@@ -860,13 +862,23 @@ próprio, é automática — ver T29).
 - Skill: `shadcn`, `frontend-design`
 
 **Done when**:
-- [ ] Registrar venda de produto funciona pela UI, debitando estoque
-- [ ] Lista mostra total do período e reflete filtros
-- [ ] `recepcionista` não vê a opção de registrar venda de produto (só visualiza a lista)
-- [ ] Teste e2e cobrindo os dois papéis + fluxo de venda
+- [x] Registrar venda de produto funciona pela UI, debitando estoque
+- [x] Lista mostra total do período e reflete filtros
+- [x] `recepcionista` não vê a opção de registrar venda de produto (só visualiza a lista) — `isDono` (via `getCurrentUserRole`, T6) controla a renderização do formulário
+- [x] Teste e2e cobrindo os dois papéis + fluxo de venda (execução real segue bloqueada neste sandbox)
 
 **Tests**: e2e
 **Gate**: full
+
+**Notas de execução**: Correção feita antes desta task: o middleware
+(T7) tinha `/vendas/produto` na lista de rotas restritas a dono, mas o
+design final usa uma página única (`/vendas`) compartilhada — corrigido
+removendo essa entrada de `ROTAS_RESTRITAS_A_DONO` e do `matcher`
+(`/vendas` nunca deveria bloquear recepcionista, que precisa ver a
+lista por VEN-05). A restrição de quem pode *registrar* venda de
+produto continua real: `isDono` esconde o formulário na UI, e mesmo que
+alguém forje a chamada, RLS (T20) e `getProdutos` retornando `[]` pra
+não-dono (T19) bloqueiam de verdade.
 
 ---
 

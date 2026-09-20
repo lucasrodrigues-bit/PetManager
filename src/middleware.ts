@@ -1,8 +1,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-/** Rotas acessíveis exclusivamente ao papel `dono` (AUTH-03). */
-const ROTAS_RESTRITAS_A_DONO = ["/estoque", "/vendas/produto", "/relatorios"];
+/**
+ * Rotas acessíveis exclusivamente ao papel `dono` (AUTH-03).
+ * `/vendas` NÃO entra aqui de propósito: a lista de vendas é
+ * compartilhada (VEN-05, dono e recepcionista veem o mesmo); só a
+ * ação de registrar venda de produto é restrita a dono, e isso é
+ * verificado dentro da própria página (T24), não por rota.
+ */
+const ROTAS_RESTRITAS_A_DONO = ["/estoque", "/relatorios"];
 
 function rotaRestritaADono(pathname: string): boolean {
   return ROTAS_RESTRITAS_A_DONO.some((rota) => pathname.startsWith(rota));
@@ -56,5 +62,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/estoque/:path*", "/vendas/produto/:path*", "/relatorios/:path*"],
+  matcher: ["/estoque/:path*", "/relatorios/:path*"],
 };
