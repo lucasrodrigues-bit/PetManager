@@ -884,6 +884,8 @@ não-dono (T19) bloqueiam de verdade.
 
 ### T25: Server Action `criarAgendamento`
 
+**Status**: ✅ Complete
+
 **What**: Criação de agendamento, validando horário dentro do
 expediente cadastrado.
 **Where**: `src/features/agenda/actions.ts`
@@ -896,13 +898,18 @@ expediente cadastrado.
 - Skill: `software-architecture`
 
 **Done when**:
-- [ ] Agendamento criado com status inicial "agendado"
-- [ ] Rejeita horário fora do expediente
-- [ ] Dois agendamentos simultâneos no mesmo horário são ambos aceitos sem bloqueio (aceito conforme spec)
-- [ ] Testes unitários cobrindo os três ACs
+- [x] Agendamento criado com status inicial "agendado" (default do banco)
+- [x] Rejeita horário fora do expediente
+- [x] Dois agendamentos simultâneos no mesmo horário são ambos aceitos sem bloqueio (aceito conforme spec)
+- [x] Testes unitários cobrindo os três ACs
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Dia da semana e hora extraídos de `dataHora`
+(ISO) via `Date` nativo, comparados contra `getHorarios()` (T10). Não
+seta `status` explicitamente no insert — usa o `default 'agendado'` já
+garantido pelo schema (migration `0002`).
 
 ---
 
