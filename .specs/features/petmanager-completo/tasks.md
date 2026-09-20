@@ -783,6 +783,8 @@ compartilhado com T7/T8 (conta de teste seedada).
 
 ### T22: Server Action `registrarVendaProduto`
 
+**Status**: ✅ Complete
+
 **What**: Chama `registrar_venda_produto` (T20) a partir da aplicação,
 tratando o erro de saldo insuficiente.
 **Where**: `src/features/vendas/actions.ts`
@@ -795,12 +797,19 @@ tratando o erro de saldo insuficiente.
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Venda de produto registrada com sucesso debita o estoque corretamente
-- [ ] Quantidade maior que o saldo retorna mensagem de saldo insuficiente
-- [ ] Testes unitários cobrindo os dois ACs
+- [x] Venda de produto registrada com sucesso debita o estoque corretamente
+- [x] Quantidade maior que o saldo retorna mensagem de saldo insuficiente
+- [x] Testes unitários cobrindo os dois ACs
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Chama `supabase.rpc("registrar_venda_produto", ...)`
+— toda a lógica (validação de saldo, insert de venda/movimentação,
+débito de estoque) já vive na função Postgres transacional do T20;
+aqui só existe tradução de mensagem de erro (`error.message.includes(...)`,
+frágil a mudança de texto na função SQL — aceito por ora, mesmo padrão
+usado nas outras Server Actions do projeto).
 
 ---
 
