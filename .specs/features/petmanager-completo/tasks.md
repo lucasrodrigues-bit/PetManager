@@ -915,6 +915,8 @@ garantido pelo schema (migration `0002`).
 
 ### T26: Server Actions `editarAgendamento` / `cancelarAgendamento`
 
+**Status**: ✅ Complete
+
 **What**: Edição (preservando `id`) e cancelamento (soft delete, sem
 gerar venda).
 **Where**: `src/features/agenda/actions.ts`
@@ -927,12 +929,18 @@ gerar venda).
 - Skill: `mastering-typescript`
 
 **Done when**:
-- [ ] Edição preserva `id` e reflete mudanças corretamente
-- [ ] Cancelamento muda status sem excluir o registro nem criar venda
-- [ ] Testes unitários cobrindo ambos
+- [x] Edição preserva `id` e reflete mudanças corretamente
+- [x] Cancelamento muda status sem excluir o registro nem criar venda
+- [x] Testes unitários cobrindo ambos
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: `editarAgendamento` substitui o vínculo de
+serviços inteiro (delete + insert) quando `servicoIds` é passado, em
+vez de tentar diff — mais simples, sem risco de duplicar linha em
+`agendamento_servicos`. `cancelarAgendamento` só faz `update`, nunca
+`delete` nem `insert` em `vendas` (testado explicitamente).
 
 ---
 
