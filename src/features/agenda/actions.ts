@@ -207,3 +207,30 @@ export async function concluirAgendamento(id: number): Promise<ConcluirAgendamen
 
   return { vendaId: data as number };
 }
+
+interface ReabrirAgendamentoConcluidoResult {
+  error?: string;
+}
+
+/**
+ * Reabre um agendamento concluído, removendo a venda associada
+ * (idempotente — nenhum erro se já não houver venda) via a função
+ * Postgres transacional `reabrir_agendamento_concluido` (migration
+ * 0007). Existe pra AGD-08 nunca deixar o faturamento inflado.
+ */
+export async function reabrirAgendamentoConcluido(id: number): Promise<ReabrirAgendamentoConcluidoResult> {
+  const supabase = await createClient();
+
+  const { error } = await supabase.rpc("reabrir_agendamento_concluido", {
+    p_agendamento_id: id,
+  });
+
+  if (error) {
+    if (error.message.includes("Agendamento não encontrado")) {
+      return { error: "Agendamento não encontrado." };
+    }
+    return { error: "Não foi possível reabrir o agendamento. Tente novamente." };
+  }
+
+  return {};
+}

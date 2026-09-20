@@ -1012,6 +1012,8 @@ amigável na Server Action.
 
 ### T29: Server Action `reabrirAgendamentoConcluido` (estorna venda)
 
+**Status**: ✅ Complete
+
 **What**: Reabre um agendamento concluído, removendo a venda associada
 (idempotente se não houver venda).
 **Where**: `src/features/agenda/actions.ts`
@@ -1020,16 +1022,26 @@ amigável na Server Action.
 **Requirement**: AGD-08, VEN-01
 
 **Tools**:
-- MCP: NONE
+- MCP: `Supabase`
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Reabrir remove a venda associada, faturamento não fica inflado
-- [ ] Reabrir um agendamento já sem venda não gera erro
-- [ ] Testes unitários cobrindo os dois ACs
+- [x] Reabrir remove a venda associada, faturamento não fica inflado
+- [x] Reabrir um agendamento já sem venda não gera erro
+- [x] Testes unitários cobrindo os dois ACs
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Task original previa `MCP: NONE`, mas achei o
+gap antes de codar: a RLS de `vendas` (T20) não tem policy de `DELETE`
+— um `.delete()` direto do client seria bloqueado silenciosamente (0
+linhas, sem erro), deixando a venda órfã e inflando o faturamento
+(exatamente o bug que esta task existe pra evitar). Precisou de outra
+função `security definer` (migration `0007`,
+`reabrir_agendamento_concluido`) — já aplicada com o `revoke ... from
+anon` explícito de cara (lição L-003 do T28 aplicada aqui direto,
+`get_advisors` confirmou limpo na primeira tentativa desta vez).
 
 ---
 
