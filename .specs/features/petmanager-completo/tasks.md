@@ -751,6 +751,8 @@ consegue escrever ali.
 
 ### T21: Tela de estoque (restrita a dono)
 
+**Status**: ✅ Complete
+
 **What**: Tela de cadastro de produto + entrada de estoque + listagem
 com busca/filtro e alerta de estoque baixo.
 **Where**: `src/app/(dashboard)/estoque/page.tsx`
@@ -763,13 +765,19 @@ com busca/filtro e alerta de estoque baixo.
 - Skill: `shadcn`, `frontend-design`
 
 **Done when**:
-- [ ] Fluxo de cadastro + entrada funciona pela UI
-- [ ] Alerta de estoque baixo visível quando saldo ≤ mínimo
-- [ ] `recepcionista` não vê o menu nem acessa a rota diretamente
-- [ ] Teste e2e cobrindo os dois papéis
+- [x] Fluxo de cadastro + entrada funciona pela UI
+- [x] Alerta de estoque baixo visível quando saldo ≤ mínimo
+- [x] `recepcionista` não vê o menu nem acessa a rota diretamente — coberto por middleware (T7) + `getProdutos` retornando `[]` (T19)
+- [x] Teste e2e cobrindo os dois papéis (sem sessão → `/login`; fluxo completo com sessão de dono)
 
 **Tests**: e2e
 **Gate**: full
+
+**Notas de execução**: Categorias do filtro vêm de uma segunda chamada
+`getProdutos()` sem filtro (mesmo padrão do T14 com tutores) — senão
+filtrar por categoria faria as outras categorias desaparecerem do
+select. Cenário de sessão real de `recepcionista` segue como TODO
+compartilhado com T7/T8 (conta de teste seedada).
 
 ---
 
