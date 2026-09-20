@@ -68,3 +68,75 @@ export async function criarAgendamento({
 
   return { id: agendamento.id };
 }
+
+interface EditarAgendamentoInput {
+  id: number;
+  petId?: number;
+  servicoIds?: number[];
+  dataHora?: string;
+}
+
+interface EditarAgendamentoResult {
+  error?: string;
+}
+
+/**
+ * Edita um agendamento existente, preservando o `id` (AGD-04). Quando
+ * `servicoIds` é informado, substitui o vínculo inteiro (delete +
+ * insert) em vez de tentar diff — mais simples e sem risco de duplicar
+ * linha na tabela de junção.
+ */
+export async function editarAgendamento({
+  id,
+  petId,
+  servicoIds,
+  dataHora,
+}: EditarAgendamentoInput): Promise<EditarAgendamentoResult> {
+  const supabase = await createClient();
+
+  const updates: Record<string, unknown> = {};
+  if (petId !== undefined) updates.pet_id = petId;
+  if (dataHora !== undefined) updates.data_hora = dataHora;
+
+  if (Object.keys(updates).length > 0) {
+    const { error } = await supabase.from("agendamentos").update(updates).eq("id", id);
+    if (error) {
+      return { error: "Não foi possível editar o agendamento. Tente novamente." };
+    }
+  }
+
+  if (servicoIds !== undefined) {
+    await supabase.from("agendamento_servicos").delete().eq("agendamento_id", id);
+
+    if (servicoIds.length > 0) {
+      const { error: insertError } = await supabase
+        .from("agendamento_servicos")
+        .insert(servicoIds.map((servicoId) => ({ agendamento_id: id, servico_id: servicoId })));
+
+      if (insertError) {
+        return { error: "Não foi possível atualizar os serviços do agendamento. Tente novamente." };
+      }
+    }
+  }
+
+  return {};
+}
+
+interface CancelarAgendamentoResult {
+  error?: string;
+}
+
+/**
+ * Cancela um agendamento (soft delete — só muda o status, nunca exclui
+ * o registro) e nunca cria venda (AGD-05).
+ */
+export async function cancelarAgendamento(id: number): Promise<CancelarAgendamentoResult> {
+  const supabase = await createClient();
+  const { error } = await supabase.from("agendamentos").update({ status: "cancelado" }).eq("id", id);
+
+  if (error) {
+    return { error: "Não foi possível cancelar o agendamento. Tente novamente." };
+  }
+
+  return {};
+}
