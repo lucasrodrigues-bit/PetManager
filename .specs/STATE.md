@@ -59,13 +59,20 @@
 - **Date**: 2026-09-18
 - **Status**: active
 
+### AD-008
+- **Decision**: A partir de agora, tasks (`T<N>`) do `tasks.md` são executadas em sequência sem pedir confirmação antes de cada uma — plano + implementação + gates + PR + merge direto, uma atrás da outra. Continuo parando pra perguntar em decisões que não são rotina de task (achados de reconciliação, mudanças de escopo/arquitetura, incidentes como o do v0 sync).
+- **Reason**: Pedido explícito do usuário — quer mais velocidade de execução, já validou o padrão de qualidade nas ~18 tasks anteriores.
+- **Trade-off**: Menos pontos de checagem antes de cada task individual; compensado pelos gates automáticos (build/test) e pelo PR de cada task ficar registrado no GitHub pra revisão posterior, mesmo que eu já tenha mergeado.
+- **Scope**: Execução de tasks do `petmanager-completo` a partir de T19.
+- **Date**: 2026-09-19
+- **Status**: active
+
 ## Handoff
 
-- **Feature**: petmanager-completo (substitui petmanager-mvp, ver AD-006)
-- **Phase / Task**: Phase 4 / T21 - Tela de estoque (restrita a dono)
-- **Completed**: T1-T20
+- **Phase / Task**: Phase 5 / T22 - Server Action registrarVendaProduto
+- **Completed**: T1-T21 (Fases 1-4 completas)
 - **In-progress**: none
-- **Next step**: Executar T21 (última task da Fase 4 — tela de estoque)
+- **Next step**: Executar T22 (início da Fase 5: Vendas)
 - **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main
