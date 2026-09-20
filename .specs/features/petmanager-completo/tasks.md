@@ -1077,6 +1077,8 @@ renderiza.
 
 ### T31: Query `getAgendamentosFiltrados`
 
+**Status**: ✅ Complete
+
 **What**: Lista de agendamentos com busca (pet/tutor) e filtro por
 status (`shared/filters`), para a tela de listagem (distinta da visão
 de agenda diária do T30).
@@ -1090,13 +1092,17 @@ de agenda diária do T30).
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Busca por pet/tutor e filtro por status funcionam combinados
-- [ ] Teste unitário cobrindo busca vazia e combinada
+- [x] Busca por pet/tutor e filtro por status funcionam combinados
+- [x] Teste unitário cobrindo busca vazia e combinada
 
 **Tests**: unit
 **Gate**: quick
 
----
+**Notas de execução**: Mesmo padrão do `getVendas` (T23) — `status`
+filtra via SQL (`.eq`), `busca` roda em memória sobre pet/tutor já
+resolvidos via join em duas camadas (`pets` → `tutores`).
+
+------
 
 ### T32: Componente de calendário/horários ocupados
 
