@@ -140,3 +140,39 @@ export async function cancelarAgendamento(id: number): Promise<CancelarAgendamen
 
   return {};
 }
+
+interface ReabrirAgendamentoResult {
+  error?: string;
+}
+
+/**
+ * Reabre um agendamento cancelado, voltando ao status "agendado"
+ * (AGD-06). Rejeita se o agendamento não estiver cancelado — reabrir
+ * um "concluído" é um fluxo diferente (ver `reabrirAgendamentoConcluido`,
+ * T29, que também estorna a venda associada).
+ */
+export async function reabrirAgendamento(id: number): Promise<ReabrirAgendamentoResult> {
+  const supabase = await createClient();
+
+  const { data: agendamento, error: fetchError } = await supabase
+    .from("agendamentos")
+    .select("status")
+    .eq("id", id)
+    .single();
+
+  if (fetchError || !agendamento) {
+    return { error: "Agendamento não encontrado." };
+  }
+
+  if (agendamento.status !== "cancelado") {
+    return { error: "Só é possível reabrir um agendamento cancelado." };
+  }
+
+  const { error } = await supabase.from("agendamentos").update({ status: "agendado" }).eq("id", id);
+
+  if (error) {
+    return { error: "Não foi possível reabrir o agendamento. Tente novamente." };
+  }
+
+  return {};
+}

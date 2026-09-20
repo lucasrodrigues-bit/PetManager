@@ -946,6 +946,8 @@ vez de tentar diff — mais simples, sem risco de duplicar linha em
 
 ### T27: Server Action `reabrirAgendamento`
 
+**Status**: ✅ Complete
+
 **What**: Reabertura de agendamento cancelado (volta a "agendado").
 **Where**: `src/features/agenda/actions.ts`
 **Depends on**: T26
@@ -957,9 +959,9 @@ vez de tentar diff — mais simples, sem risco de duplicar linha em
 - Skill: `mastering-typescript`
 
 **Done when**:
-- [ ] Agendamento cancelado volta a "agendado"
-- [ ] Rejeita reabertura de agendamento que não está cancelado
-- [ ] Teste unitário cobrindo os dois casos
+- [x] Agendamento cancelado volta a "agendado"
+- [x] Rejeita reabertura de agendamento que não está cancelado
+- [x] Teste unitário cobrindo os dois casos
 
 **Tests**: unit
 **Gate**: quick
