@@ -69,10 +69,10 @@
 
 ## Handoff
 
-- **Phase / Task**: Phase 5 / T22 - Server Action registrarVendaProduto
-- **Completed**: T1-T21 (Fases 1-4 completas)
+- **Phase / Task**: Phase 5 / T23 - Query getVendas filtrada
+- **Completed**: T1-T22
 - **In-progress**: none
-- **Next step**: Executar T22 (início da Fase 5: Vendas)
+- **Next step**: Executar T23 (listagem de vendas com busca/tipo/mês)
 - **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main
