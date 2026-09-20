@@ -69,10 +69,10 @@
 
 ## Handoff
 
-- **Phase / Task**: Phase 6 / T32 - Componente de calendário/horários ocupados
-- **Completed**: T1-T31
+- **Phase / Task**: Phase 6 / T33 - Tela de criação/edição de agendamento
+- **Completed**: T1-T32
 - **In-progress**: none
-- **Next step**: Executar T32
-- **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
+- **Next step**: Executar T33 (tela principal da agenda, fecha o fluxo de estados)
+- **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista); T32's e2e também precisa do T33 pra existir de verdade
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main

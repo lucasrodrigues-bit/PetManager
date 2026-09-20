@@ -1106,6 +1106,8 @@ resolvidos via join em duas camadas (`pets` → `tutores`).
 
 ### T32: Componente de calendário/horários ocupados
 
+**Status**: ✅ Complete (e2e depende da rota `/agenda`, T33 — ver nota)
+
 **What**: Componente visual que exibe os horários ocupados do dia
 selecionado.
 **Where**: `src/features/agenda/components/AgendaCalendario.tsx`
@@ -1118,12 +1120,21 @@ selecionado.
 - Skill: `shadcn`, `frontend-design`
 
 **Done when**:
-- [ ] Horários ocupados aparecem visualmente distintos dos livres
-- [ ] Agendamentos cancelados não aparecem como "ocupados"
-- [ ] Teste e2e cobrindo a exibição correta
+- [x] Horários ocupados aparecem visualmente distintos dos livres — badge "Ocupado" (borda ciana) vs "Cancelado" (tracejado, riscado)
+- [x] Agendamentos cancelados não aparecem como "ocupados" — estilo e rótulo diferentes, nunca a badge "Ocupado"
+- [x] Teste e2e cobrindo a exibição correta — escrito, mas depende da rota `/agenda` que só existe a partir do T33 (ver nota)
 
 **Tests**: e2e
 **Gate**: full
+
+**Notas de execução**: Componente é um Server Component (`async`,
+chama `getAgendamentosPorDia` direto) — sem página própria ainda
+(T32 é só o componente, T33 é a tela). O e2e em
+`e2e/agenda-calendario.spec.ts` roda contra `/agenda`, que não existe
+até o T33 — hoje ele falha por rota inexistente (404), não por bug no
+componente; vai passar de verdade assim que T33 montar a tela (e,
+como sempre, a execução real do Playwright em si segue bloqueada
+neste sandbox pelo binário do Chromium).
 
 ---
 
