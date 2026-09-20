@@ -970,6 +970,8 @@ vez de tentar diff — mais simples, sem risco de duplicar linha em
 
 ### T28: Server Action `concluirAgendamento` (cria venda)
 
+**Status**: ✅ Complete
+
 **What**: Marca agendamento como "concluído" e cria automaticamente 1
 venda de serviço (via função Postgres transacional, mesma técnica do
 T20).
@@ -983,12 +985,28 @@ T20).
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Concluir cria exatamente 1 venda com valor = soma do `preco_interno` dos serviços
-- [ ] Permitido independentemente de a data já ter passado
-- [ ] Testes unitários cobrindo os dois ACs
+- [x] Concluir cria exatamente 1 venda com valor = soma do `preco_interno` dos serviços
+- [x] Permitido independentemente de a data já ter passado
+- [x] Testes unitários cobrindo os dois ACs
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Função `concluir_agendamento` (migration
+`0006`) é `security definer`, já que a RLS de `vendas` não deixa o
+client inserir `tipo='servico'` diretamente (de propósito). As
+ferramentas MCP do Supabase ficaram indisponíveis por um tempo nesta
+sessão (`No approval received` em tudo, até um `select 1`); voltaram a
+funcionar e a migration foi aplicada. Achado no `get_advisors` logo
+depois: `anon` conseguia executar a função mesmo com
+`revoke ... from public` — Supabase concede `EXECUTE` a `anon` por
+padrão em funções novas do schema `public`, então precisou de um
+`revoke ... from anon` explícito. Corrigido, aplicado, e confirmado com
+`get_advisors` limpo (só sobra o aviso esperado/intencional de
+`authenticated` poder executar). Constraint `vendas_agendamento_unique`
+(já existente desde o T20) garante que concluir o mesmo agendamento
+duas vezes falha, em vez de duplicar a venda — traduzido pra mensagem
+amigável na Server Action.
 
 ---
 

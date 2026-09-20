@@ -26,6 +26,12 @@ Seen once or not yet corroborated. Tracked, not trusted.
 - evidence: design.md data model (produtos.categoria/estoque_minimo, T18 vs T20)
 - last seen: 2026-09-19T19:42:41Z
 
+### L-003 - Supabase concede EXECUTE a anon por padrao em funcoes novas do schema public - revoke...from public nao basta pra security definer, precisa revoke...from anon explicito. Sempre checar get_advisors depois de criar uma funcao security definer.
+- signal: `spec_deviation` · recurrence: 1 feature(s) · harmful: 0
+- features: petmanager-completo
+- evidence: supabase advisors (concluir_agendamento, T28)
+- last seen: 2026-09-20T22:40:45Z
+
 ## Quarantined (failed when applied - ignore)
 
 A confirmed lesson that recurred alongside failure. Kept for the maintainer to review.

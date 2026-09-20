@@ -176,3 +176,34 @@ export async function reabrirAgendamento(id: number): Promise<ReabrirAgendamento
 
   return {};
 }
+
+interface ConcluirAgendamentoResult {
+  error?: string;
+  vendaId?: number;
+}
+
+/**
+ * Marca o agendamento como "concluído" e cria automaticamente 1 venda
+ * de serviço (AGD-07, VEN-01) — tudo dentro da função Postgres
+ * transacional `concluir_agendamento` (migration 0006). Permitido
+ * mesmo se a data já passou (a spec exige isso explicitamente).
+ */
+export async function concluirAgendamento(id: number): Promise<ConcluirAgendamentoResult> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.rpc("concluir_agendamento", {
+    p_agendamento_id: id,
+  });
+
+  if (error) {
+    if (error.message.includes("Agendamento não encontrado")) {
+      return { error: "Agendamento não encontrado." };
+    }
+    if (error.message.includes("vendas_agendamento_unique") || error.code === "23505") {
+      return { error: "Este agendamento já foi concluído." };
+    }
+    return { error: "Não foi possível concluir o agendamento. Tente novamente." };
+  }
+
+  return { vendaId: data as number };
+}

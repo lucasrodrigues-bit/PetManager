@@ -3,7 +3,7 @@
   "promote_threshold": 2,
   "window_days": 45,
   "quarantine_threshold": 2,
-  "next_id": 3,
+  "next_id": 4,
   "lessons": [
     {
       "id": "L-001",
@@ -40,6 +40,24 @@
       ],
       "created": "2026-09-19T19:42:41Z",
       "last_seen": "2026-09-19T19:42:41Z"
+    },
+    {
+      "id": "L-003",
+      "key": "spec_deviation::supabase concede execute a anon por padrao em funcoes novas do schema public revoke from public nao basta pra security definer precisa revoke from anon explicito sempre checar get advisors depois de criar uma funcao security definer",
+      "text": "Supabase concede EXECUTE a anon por padrao em funcoes novas do schema public - revoke...from public nao basta pra security definer, precisa revoke...from anon explicito. Sempre checar get_advisors depois de criar uma funcao security definer.",
+      "signal": "spec_deviation",
+      "scope": "",
+      "status": "candidate",
+      "features": [
+        "petmanager-completo"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "supabase advisors (concluir_agendamento, T28)"
+      ],
+      "created": "2026-09-20T22:40:45Z",
+      "last_seen": "2026-09-20T22:40:45Z"
     }
   ]
 }
