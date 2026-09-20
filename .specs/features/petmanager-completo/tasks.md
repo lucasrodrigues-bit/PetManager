@@ -1047,6 +1047,8 @@ anon` explícito de cara (lição L-003 do T28 aplicada aqui direto,
 
 ### T30: Query `getAgendamentosPorDia`
 
+**Status**: ✅ Complete
+
 **What**: Retorna agendamentos de um dia específico (horários
 ocupados).
 **Where**: `src/features/agenda/queries.ts`
@@ -1059,11 +1061,17 @@ ocupados).
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Retorna todos os agendamentos do dia, incluindo cancelados (exibição visual diferenciada)
-- [ ] Teste unitário cobrindo dia vazio e com múltiplos agendamentos
+- [x] Retorna todos os agendamentos do dia, incluindo cancelados (exibição visual diferenciada)
+- [x] Teste unitário cobrindo dia vazio e com múltiplos agendamentos
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Join em duas camadas (`pets`, `agendamento_servicos → servicos`)
+pra já trazer nome do pet e dos serviços prontos pro componente de
+calendário (T32) — sem filtro de status, "incluindo cancelados" é o
+comportamento padrão; a diferenciação visual fica por conta de quem
+renderiza.
 
 ---
 
