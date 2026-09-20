@@ -815,6 +815,8 @@ usado nas outras Server Actions do projeto).
 
 ### T23: Query `getVendas` filtrada
 
+**Status**: ✅ Complete
+
 **What**: Lista todas as vendas (produto + serviço), com busca/filtro
 por tipo e mês (`shared/filters`).
 **Where**: `src/features/vendas/queries.ts`
@@ -827,12 +829,19 @@ por tipo e mês (`shared/filters`).
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Lista vendas de produto e serviço ordenadas por data (mais recente primeiro)
-- [ ] Filtro por tipo e busca por item funcionam combinados
-- [ ] Teste unitário cobrindo lista vazia, filtrada e combinada
+- [x] Lista vendas de produto e serviço ordenadas por data (mais recente primeiro)
+- [x] Filtro por tipo e busca por item funcionam combinados
+- [x] Teste unitário cobrindo lista vazia, filtrada e combinada
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: `tipo`/`mes` filtram via SQL (`.eq`/`.gte`/`.lt`);
+`busca` filtra em memória sobre o `itemNome` já resolvido — o nome de
+uma venda de serviço vem de um join em duas camadas (`agendamentos` →
+`agendamento_servicos` → `servicos`) que não dá pra combinar num
+`ilike` simples sem uma view dedicada, e o volume por petshop é pequeno
+o bastante pra isso não ser problema de performance.
 
 ---
 
