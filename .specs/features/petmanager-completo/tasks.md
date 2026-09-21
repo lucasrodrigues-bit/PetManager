@@ -1239,6 +1239,8 @@ continua como defesa em profundidade).
 
 ### T36: Query `getVacinas` filtrada (todas, não só por pet)
 
+**Status**: ✅ Complete
+
 **What**: Listagem de vacinas com busca (pet/nome da vacina) e filtro
 por status (`shared/filters`), para a tela geral de vacinas.
 **Where**: `src/features/vacinas/queries.ts`
@@ -1251,11 +1253,19 @@ por status (`shared/filters`), para a tela geral de vacinas.
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Busca e filtro por status funcionam combinados
-- [ ] Teste unitário cobrindo busca vazia e combinada
+- [x] Busca e filtro por status funcionam combinados
+- [x] Teste unitário cobrindo busca vazia e combinada
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: FILT-02 pede filtro de status em Vacinas, mas
+não existe coluna `status` na tabela — resolvido como valor
+**derivado**: `"atrasada"` quando `dataRetornoPrevista` já passou,
+`"em-dia"` quando não. Como não é coluna, `status` e `busca` filtram em
+memória (mesmo padrão de `getVendas`/`getAgendamentosFiltrados`).
+Testes usam `vi.useFakeTimers()` pra fixar "hoje" e tornar o cálculo
+de status determinístico.
 
 ---
 
