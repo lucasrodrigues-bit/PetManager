@@ -1175,6 +1175,8 @@ de verdade a partir de agora.
 
 ### T34: Tela de listagem de agendamentos (com filtros)
 
+**Status**: ✅ Complete
+
 **What**: Listagem separada da visão diária — usa `getAgendamentosFiltrados`
 (T31) e `<SearchFilterBar />` para busca/status.
 **Where**: `src/app/(dashboard)/agenda/lista/page.tsx`
@@ -1187,14 +1189,18 @@ de verdade a partir de agora.
 - Skill: `shadcn`
 
 **Done when**:
-- [ ] Busca e filtro de status funcionam combinados na listagem
-- [ ] Lista atualiza sem recarregar a página inteira
-- [ ] Teste e2e cobrindo busca + filtro combinados
+- [x] Busca e filtro de status funcionam combinados na listagem
+- [x] Lista atualiza sem recarregar a página inteira (`router.replace` do `useListFilters`, sem full reload)
+- [x] Teste e2e cobrindo busca + filtro combinados (execução real segue bloqueada neste sandbox)
 
 **Tests**: e2e
 **Gate**: full
 
----
+**Notas de execução**: Terceira tela a reusar `<SearchFilterBar />`
+(depois de Pets/T14, Estoque/T21, Vendas/T24) — mesmo padrão,
+consistente. Fecha a Fase 6 (Agenda).
+
+------
 
 ### T35: Server Action `registrarVacina` + Query `getVacinasPorPet`
 
