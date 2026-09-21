@@ -69,10 +69,10 @@
 
 ## Handoff
 
-- **Phase / Task**: Phase 7 / T36 - Query getVacinas filtrada
-- **Completed**: T1-T35
+- **Phase / Task**: Phase 7 / T37 - Tela de vacinas (histórico + geral, com filtros)
+- **Completed**: T1-T36
 - **In-progress**: none
-- **Next step**: Executar T36 (listagem geral de vacinas com busca/status)
+- **Next step**: Executar T37 (última task da Fase 7)
 - **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main
