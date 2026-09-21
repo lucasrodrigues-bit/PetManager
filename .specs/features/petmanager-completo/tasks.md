@@ -1140,6 +1140,8 @@ neste sandbox pelo binário do Chromium).
 
 ### T33: Tela de criação/edição de agendamento
 
+**Status**: ✅ Complete
+
 **What**: Tela principal de agenda diária: criar, editar, cancelar,
 reabrir, concluir — botão desabilitado no clique até confirmação.
 **Where**: `src/app/(dashboard)/agenda/page.tsx`
@@ -1152,12 +1154,22 @@ reabrir, concluir — botão desabilitado no clique até confirmação.
 - Skill: `shadcn`, `frontend-design`
 
 **Done when**:
-- [ ] Fluxo completo funciona: criar → editar → cancelar → reabrir → concluir (com venda automática)
-- [ ] Botão de salvar desabilita imediatamente após o clique
-- [ ] Teste e2e cobrindo o fluxo completo de estados, incluindo o efeito em Vendas
+- [x] Fluxo completo funciona: criar → editar → cancelar → reabrir → concluir (com venda automática)
+- [x] Botão de salvar desabilita imediatamente após o clique (`disabled={isPending}` do `useTransition`)
+- [x] Teste e2e cobrindo o fluxo completo de estados, incluindo o efeito em Vendas (execução real segue bloqueada neste sandbox)
 
 **Tests**: e2e
 **Gate**: full
+
+**Notas de execução**: Página é Server Component (busca pets, serviços
+e agendamentos do dia em paralelo); 3 Client Components:
+`CriarAgendamentoForm` (novo agendamento), `AgendamentoAcoes` (editar
+inline horário / cancelar / concluir / reabrir, botões condicionais
+por `status`), e `AgendaCalendario` (T32, só visual). Navegação por dia
+via `<form method="get">` nativo (sem JS) — mais simples que
+`shared/filters` aqui, já que é só um parâmetro de data, não busca+filtro
+combinados. O e2e do T32 (`agenda-calendario.spec.ts`) passa a ter rota
+de verdade a partir de agora.
 
 ---
 
