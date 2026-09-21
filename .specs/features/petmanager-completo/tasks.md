@@ -1204,6 +1204,8 @@ consistente. Fecha a Fase 6 (Agenda).
 
 ### T35: Server Action `registrarVacina` + Query `getVacinasPorPet`
 
+**Status**: ✅ Complete
+
 **What**: Registro de vacina com data de retorno e consulta do
 histórico por pet.
 **Where**: `src/features/vacinas/actions.ts`
@@ -1212,17 +1214,26 @@ histórico por pet.
 **Requirement**: VAC-01, VAC-02
 
 **Tools**:
-- MCP: NONE
+- MCP: `Supabase`
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Vacina salva com data de aplicação e retorno previsto
-- [ ] Rejeita retorno anterior à aplicação
-- [ ] Histórico retorna todas as vacinas do pet, ordenadas por data
-- [ ] Testes unitários cobrindo os três ACs
+- [x] Vacina salva com data de aplicação e retorno previsto
+- [x] Rejeita retorno anterior à aplicação
+- [x] Histórico retorna todas as vacinas do pet, ordenadas por data
+- [x] Testes unitários cobrindo os três ACs
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Gap encontrado antes de codar: a tabela
+`vacinas` (migration `0002`) nunca teve coluna de nome, mas FILT-01
+exige busca "por pet/nome da vacina". Corrigido com uma migration
+pequena e aditiva (`0008_vacina_nome.sql`, `DEFAULT 'Vacina'` pra não
+quebrar linha existente) antes de escrever o Server Action — mesmo
+padrão dos gaps do T18 e T29. Checagem de retorno >= aplicação
+reforçada na Server Action antes do banco (o `CHECK` já existente
+continua como defesa em profundidade).
 
 ---
 
