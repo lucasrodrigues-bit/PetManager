@@ -1303,6 +1303,8 @@ lá. Fecha a Fase 7 (Vacinas).
 
 ### T38: Query `getRelatorioMensal` (lê de `vendas`)
 
+**Status**: ✅ Complete
+
 **What**: Agrega, por mês, agendamentos concluídos/cancelados e
 faturamento total — agora um único `SUM(vendas.valor_total)`.
 **Where**: `src/features/relatorios/queries.ts`
@@ -1315,14 +1317,23 @@ faturamento total — agora um único `SUM(vendas.valor_total)`.
 - Skill: `supabase-postgres-best-practices`
 
 **Done when**:
-- [ ] Contagem de concluídos e cancelados corretas e separadas
-- [ ] Faturamento = soma de `vendas.valor_total` do mês (produto + serviço)
-- [ ] Mês sem dados retorna zero em todos os campos, sem erro
-- [ ] Restrito ao papel `dono`
-- [ ] Testes unitários cobrindo os quatro ACs
+- [x] Contagem de concluídos e cancelados corretas e separadas
+- [x] Faturamento = soma de `vendas.valor_total` do mês (produto + serviço)
+- [x] Mês sem dados retorna zero em todos os campos, sem erro
+- [x] Restrito ao papel `dono`
+- [x] Testes unitários cobrindo os quatro ACs
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Reaproveita `getVendas({ mes })` (T23) em vez de
+somar `valor_total` direto via SQL — soma em JS sobre o resultado já
+filtrado por mês, consistente com a fonte única de faturamento (VEN,
+AD-006). Contagens de concluído/cancelado usam `count: "exact", head:
+true` (não traz linhas, só o número). Restrição a `dono` no mesmo
+padrão do `getProdutos` (T19): não-dono recebe relatório zerado, nunca
+dado real — RLS de `agendamentos`/`vendas` seria a defesa de fundo,
+mas isso evita a tentativa de leitura.
 
 ---
 

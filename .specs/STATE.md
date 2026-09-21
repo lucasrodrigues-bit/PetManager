@@ -69,10 +69,10 @@
 
 ## Handoff
 
-- **Phase / Task**: Phase 8 / T38 - Query getRelatorioMensal (lê de vendas)
-- **Completed**: T1-T37 (Fases 1-7 completas)
+- **Phase / Task**: Phase 8 / T39 - shared/pdf/relatorio-pdf.tsx
+- **Completed**: T1-T38
 - **In-progress**: none
-- **Next step**: Executar T38 (início e última fase: Relatórios + PDF)
+- **Next step**: Executar T39 (geracao de PDF server-side, @react-pdf/renderer)
 - **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
 - **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
 - **Branch**: main
