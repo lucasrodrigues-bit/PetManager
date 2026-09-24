@@ -1369,6 +1369,8 @@ aceitam `^19.0.0`).
 
 ### T40: Server Action `gerarRelatorioPdf`
 
+**Status**: ✅ Complete
+
 **What**: Chama `getRelatorioMensal` (T38) + `renderRelatorioPdf` (T39)
 e retorna o PDF para download, tratando falha de geração sem quebrar a
 tela.
@@ -1382,12 +1384,20 @@ tela.
 - Skill: `documentation-writer`
 
 **Done when**:
-- [ ] Download do PDF funciona para um mês com dados e um mês vazio
-- [ ] Falha simulada na geração retorna erro sem derrubar a tela do relatório
-- [ ] Teste unitário cobrindo sucesso e falha
+- [x] Download do PDF funciona para um mês com dados e um mês vazio
+- [x] Falha simulada na geração retorna erro sem derrubar a tela do relatório
+- [x] Teste unitário cobrindo sucesso e falha
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: Retorna o PDF como base64 (`buffer.toString("base64")`)
+em vez do `Buffer` direto — Server Actions do Next.js não serializam
+binário bruto de forma confiável pro client; quem consome (T41)
+decodifica e dispara o download. `try/catch` genérico em volta de toda
+a geração garante que qualquer falha (do `getRelatorioMensal` ou do
+`renderRelatorioPdf`) vira `{ error }`, nunca lança — condição
+explícita do REL-07.
 
 ---
 
