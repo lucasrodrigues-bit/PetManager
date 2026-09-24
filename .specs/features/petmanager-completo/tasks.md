@@ -1339,6 +1339,8 @@ mas isso evita a tentativa de leitura.
 
 ### T39: `shared/pdf/relatorio-pdf.tsx` — geração do PDF
 
+**Status**: ✅ Complete
+
 **What**: Componente/função que renderiza o layout do relatório mensal
 em PDF via `@react-pdf/renderer`.
 **Where**: `src/shared/pdf/relatorio-pdf.tsx`
@@ -1351,11 +1353,17 @@ em PDF via `@react-pdf/renderer`.
 - Skill: `frontend-design`
 
 **Done when**:
-- [ ] PDF gerado contém os mesmos números exibidos na tela (contagens, faturamento, listas por serviço/produto)
-- [ ] Teste unitário validando a estrutura do buffer gerado (não fica vazio/corrompido)
+- [x] PDF gerado contém os mesmos números exibidos na tela (contagens, faturamento, listas por serviço/produto) — usa `RelatorioMensal` (T38) direto, nada recalculado
+- [x] Teste unitário validando a estrutura do buffer gerado (não fica vazio/corrompido) — checa assinatura `%PDF-` e tamanho > 0, para um mês com vendas e um mês vazio
 
 **Tests**: unit
 **Gate**: quick
+
+**Notas de execução**: `@react-pdf/renderer` funcionou de primeira sob
+o `environment: "jsdom"` global do Vitest (T3), sem precisar de config
+separada — `renderToBuffer` roda puro em Node por baixo, JSDOM não
+interfere. Nenhum problema de compatibilidade com React 19 (peer deps
+aceitam `^19.0.0`).
 
 ---
 
