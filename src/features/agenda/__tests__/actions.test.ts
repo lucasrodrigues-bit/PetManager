@@ -48,6 +48,21 @@ describe("criarAgendamento", () => {
     );
   });
 
+  it("aceita agendamento exatamente no horário de abertura (valor de limite)", async () => {
+    // Sensor de discriminação (fechamento do projeto) encontrou que o
+    // teste original não cobria o limite exato — só valores
+    // estritamente dentro do expediente. Sem este teste, trocar
+    // `hora < horaAbertura` por `hora <= horaAbertura` passava
+    // despercebido (mutante sobrevivia).
+    const result = await criarAgendamento({
+      petId: 1,
+      servicoIds: [1],
+      dataHora: "2026-09-21T09:00:00",
+    });
+
+    expect(result.error).toBeUndefined();
+  });
+
   it("rejeita horário fora do expediente", async () => {
     const result = await criarAgendamento({
       petId: 1,

@@ -26,9 +26,14 @@ export function SearchFilterBar<T extends string>({
   const { busca, filtro, setBusca, setFiltro } = useListFilters(atributos);
   const [inputValue, setInputValue] = useState(busca);
 
-  useEffect(() => {
+  // Sincroniza o input quando a URL muda por fora (ex.: botão voltar) —
+  // ajuste de estado durante o render, padrão recomendado pelo React
+  // em vez de setState dentro de useEffect.
+  const [buscaAnterior, setBuscaAnterior] = useState(busca);
+  if (busca !== buscaAnterior) {
+    setBuscaAnterior(busca);
     setInputValue(busca);
-  }, [busca]);
+  }
 
   useEffect(() => {
     const timeout = setTimeout(() => {

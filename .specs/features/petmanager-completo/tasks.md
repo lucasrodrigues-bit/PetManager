@@ -1403,6 +1403,8 @@ explícita do REL-07.
 
 ### T41: Tela de relatório mensal (navegável + exportar PDF)
 
+**Status**: ✅ Complete — ÚLTIMA TASK DO PLANO
+
 **What**: Dashboard/relatório navegável por mês, com botão "Exportar
 PDF".
 **Where**: `src/app/(dashboard)/relatorios/page.tsx`
@@ -1415,10 +1417,19 @@ PDF".
 - Skill: `shadcn`, `frontend-design`
 
 **Done when**:
-- [ ] Navegação entre meses funciona e atualiza os dados exibidos
-- [ ] Botão "Exportar PDF" baixa um arquivo com os dados do mês selecionado
-- [ ] `recepcionista` não acessa essa tela
-- [ ] Teste e2e cobrindo navegação, exportação e restrição de papel
+- [x] Navegação entre meses funciona e atualiza os dados exibidos
+- [x] Botão "Exportar PDF" baixa um arquivo com os dados do mês selecionado
+- [x] `recepcionista` não acessa essa tela — já coberto pelo middleware (T7, `/relatorios` está em `ROTAS_RESTRITAS_A_DONO`)
+- [x] Teste e2e cobrindo navegação, exportação e restrição de papel (execução real segue bloqueada neste sandbox)
 
 **Tests**: e2e
 **Gate**: full
+
+**Notas de execução**: Navegação por mês via `<Link>` simples
+(`?ano=&mes=`), sem estado client — mais simples que `shared/filters`
+aqui, já que não é busca+filtro combinados, é só dois parâmetros
+numéricos com anterior/próximo calculados no servidor. Botão de export
+decodifica o base64 (T40) em `Blob` e dispara download via link
+temporário. **Fecha a Fase 8 e o plano de 41 tasks inteiro.**
+
+---

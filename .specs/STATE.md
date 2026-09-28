@@ -69,10 +69,11 @@
 
 ## Handoff
 
-- **Phase / Task**: Phase 8 / T41 - Tela de relatório mensal (navegável + exportar PDF)
-- **Completed**: T1-T40
+- **Feature**: petmanager-completo — **COMPLETA** (41/41 tasks, `validation.md` = PASS com 3 lacunas de verificação documentadas)
+- **Phase / Task**: encerrada
+- **Completed**: T1-T41
 - **In-progress**: none
-- **Next step**: Executar T41 (ÚLTIMA task do plano completo)
-- **Blockers**: rodar `npx playwright install --with-deps && npm run test:e2e` fora deste sandbox pra confirmar todos os e2e de ponta a ponta; T7/T8 desta feature também precisam de uma conta de teste seedada no Supabase Auth pra cobrir os cenários com sessão real (dono/recepcionista)
-- **Uncommitted files**: none (tudo commitado após a Specify/Design de petmanager-completo, via PR)
+- **Next step**: fechar as lacunas fora do sandbox: (1) `npx playwright install --with-deps && npm run test:e2e`; (2) seedar contas de teste dono/recepcionista no Supabase Auth e cobrir os cenários com sessão real; (3) teste de RLS por papel com queries reais. Depois: migrar `middleware` -> `proxy` (aviso de depreciação do Next 16), paginação nas listas e revogar os tokens GitHub compartilhados no chat.
+- **Blockers**: nenhum bloqueio de código; só as verificações acima, que exigem ambiente com rede liberada
+- **Uncommitted files**: none (após o PR de fechamento)
 - **Branch**: main
